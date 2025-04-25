@@ -54,7 +54,9 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
         img: imgUrl,
       };
 
-      const response = await fetch(`http://localhost:5000/api/admin/updateBanner/${banner._id}`, {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
+
+      const response = await fetch(`${API_BASE_URL}/api/admin/updateBanner/${banner._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +120,7 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
               />
             </div>
           </div>
-          
+
 
           {/* Section 2: Main Title & Banner Image */}
           <h6 className="mb-3">Heading & Product Image</h6>
@@ -146,7 +148,7 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
               />
             </div>
           </div>
-          
+
 
           {/* Section 3: Exclusive Offer */}
           <h6 className="mb-3">Exclusive Offer</h6>
@@ -191,7 +193,7 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
               />
             </div>
           </div>
-          
+
 
           {/* Section 4: Theme */}
           <h6 className="mb-3">Theme</h6>
@@ -219,7 +221,7 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
               <label className="form-check-label" htmlFor="is_light">Light Theme (bluish white background)</label>
             </div>
           </div>
-          
+
 
           {/* Section 5: Button Link */}
           <div className="mb-4">
@@ -234,7 +236,7 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
               name="btn_link"
             />
           </div>
-          
+
 
           {/* Buttons */}
           <div className="d-flex justify-content-between mt-4">
