@@ -11,7 +11,7 @@ const ShowProducts = () => {
     const [editProductData, setEditProductData] = useState({});
 
     const handleCopy = (product) => {
-        const url = `https://ecommerce-frontend-jy5o.vercel.app/product-details/${product._id}`;
+        const url = `${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`;
         navigator.clipboard.writeText(url);
         toast.success('Product URL copied to clipboard!');
     };
@@ -19,7 +19,7 @@ const ShowProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/all");
+                const res = await fetch("https://ecommerce-frontend-jy5o.vercel.app/api/product/all");
                 const data = await res.json();
                 if (data.data) {
                     setProducts(data.data);
