@@ -14,7 +14,7 @@ const Category = () => {
     // Move fetchCategories out of useEffect
     const fetchCategories = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/category/all");
+            const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/all");
             const data = await res.json();
             if (data.result) {
                 setCategories(data.result); // Adjust according to your actual API structure

@@ -25,7 +25,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
         }
       }
 
-      const response = await fetch(`http://localhost:5000/api/product/edit/${productData._id}`, {
+      const response = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/edit/${productData._id}`, {
         method: 'PATCH',
         body: formData,
       });

@@ -14,7 +14,7 @@ const CategoryManager = () => {
     }, []);
 
     const fetchCategories = async () => {
-        const res = await fetch('http://localhost:5000/api/category/all');
+        const res = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/all');
         const data = await res.json();
         if (data.result) {
             setAllCategories(data.result);
@@ -23,7 +23,7 @@ const CategoryManager = () => {
 
     const handleAddParent = async () => {
         if (!newParent || !newProductType) return toast.warning('Please fill all fields.');
-        const res = await fetch('http://localhost:5000/api/category/add-parent-category', {
+        const res = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/add-parent-category', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -49,7 +49,7 @@ const CategoryManager = () => {
         const parentCat = allCategories.find(cat => cat.parent === selectedParentForSub);
         const updatedChildren = [...(parentCat?.children || []), newSubCategory];
 
-        const res = await fetch('http://localhost:5000/api/category/add-sub-category', {
+        const res = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/add-sub-category', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

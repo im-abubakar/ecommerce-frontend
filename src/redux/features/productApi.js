@@ -5,28 +5,28 @@ export const productApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => `http://localhost:5000/api/product/all`,
+      query: () => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/all`,
       providesTags:['Products']
     }),
     getProductType: builder.query({
-      query: ({ type, query }) => `http://localhost:5000/api/product/${type}?${query}`,
+      query: ({ type, query }) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/${type}?${query}`,
       providesTags:['ProductType']
     }),
     getOfferProducts: builder.query({
-      query: (type) => `http://localhost:5000/api/product/offer?type=${type}`,
+      query: (type) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/offer?type=${type}`,
       providesTags:['OfferProducts']
     }),
     getPopularProductByType: builder.query({
-      query: (type) => `http://localhost:5000/api/product/popular/${type}`,
+      query: (type) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/popular/${type}`,
       providesTags:['PopularProducts']
     }),
     getTopRatedProducts: builder.query({
-      query: () => `http://localhost:5000/api/product/top-rated`,
+      query: () => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/top-rated`,
       providesTags:['TopRatedProducts']
     }),
     // get single product
     getProduct: builder.query({
-      query: (id) => `http://localhost:5000/api/product/single-product/${id}`,
+      query: (id) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/single-product/${id}`,
       providesTags: (result, error, arg) => [{ type: "Product", id: arg }],
       invalidatesTags: (result, error, arg) => [
         { type: "RelatedProducts", id:arg },
@@ -34,7 +34,7 @@ export const productApi = apiSlice.injectEndpoints({
     }),
     // get related products
     getRelatedProducts: builder.query({
-      query: (id) => `http://localhost:5000/api/product/related-product/${id}`,
+      query: (id) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/related-product/${id}`,
       providesTags: (result, error, arg) => [
         { type: "RelatedProducts", id: arg },
       ],

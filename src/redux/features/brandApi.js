@@ -5,7 +5,7 @@ export const brandApi = apiSlice.injectEndpoints({
   overrideExisting:true,
   endpoints: (builder) => ({
     getActiveBrands: builder.query({
-      query: () => `http://localhost:5000/api/brand/active`
+      query: () => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/brand/active`
     }),
   }),
 });

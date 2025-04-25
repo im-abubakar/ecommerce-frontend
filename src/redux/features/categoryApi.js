@@ -5,16 +5,16 @@ export const categoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     addCategory: builder.mutation({
       query: (data) => ({
-        url: "http://localhost:5000/api/category/add",
+        url: "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/add",
         method: "POST",
         body: data,
       }),
     }),
     getShowCategory: builder.query({
-      query: () => `http://localhost:5000/api/category/show`
+      query: () => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/show`
     }),
     getProductTypeCategory: builder.query({
-      query: (type) => `http://localhost:5000/api/category/show/${type}`
+      query: (type) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/show/${type}`
     }),
   }),
 });

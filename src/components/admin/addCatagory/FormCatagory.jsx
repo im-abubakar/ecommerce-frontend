@@ -22,7 +22,7 @@ const FormCatagory = () => {
     useEffect(() => {
         const fetchOptions = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/category/all');
+                const res = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/all');
                 const data = await res.json();
 
                 if (data.result) {
@@ -113,7 +113,7 @@ const FormCatagory = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/api/category/create', {
+            const response = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

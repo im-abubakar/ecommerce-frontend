@@ -19,7 +19,7 @@ const ShowProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/product/all");
+                const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/all");
                 const data = await res.json();
                 if (data.data) {
                     setProducts(data.data);
@@ -60,7 +60,7 @@ const ShowProducts = () => {
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/product/${productId}`, {
+            const res = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/${productId}`, {
                 method: 'DELETE',
             });
             const data = await res.json();

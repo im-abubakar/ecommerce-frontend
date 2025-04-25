@@ -4,7 +4,7 @@ export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // get offer coupon
     getOfferCoupons: builder.query({
-      query: () => `http://localhost:5000/api/coupon`,
+      query: () => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/coupon`,
       providesTags:['Coupon'],
       keepUnusedDataFor: 600,
     }),

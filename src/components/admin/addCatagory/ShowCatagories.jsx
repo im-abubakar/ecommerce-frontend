@@ -7,7 +7,7 @@ const ShowCatagories = ({ categories, onDeleteSuccess }) => {
         if (!window.confirm("Are you sure you want to delete this category?")) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/category/delete/${id}`, {
+            const res = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/delete/${id}`, {
                 method: 'DELETE',
             });
             const data = await res.json();

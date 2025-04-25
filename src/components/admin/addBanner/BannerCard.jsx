@@ -17,7 +17,7 @@ function BannerCard({ banner, getBannerById, fetchBanners }) {
   const handleDeleteClick = async (id) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"}/api/admin/deleteBanner/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL || "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com"}/api/admin/deleteBanner/${id}`,
         {
           method: 'DELETE',
         }

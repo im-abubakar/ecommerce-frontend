@@ -30,7 +30,7 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/login', {
+      const response = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/admin/login', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
