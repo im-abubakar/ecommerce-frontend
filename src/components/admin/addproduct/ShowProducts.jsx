@@ -19,7 +19,7 @@ const ShowProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("https://ecommerce-frontend-jy5o.vercel.app/api/product/all");
+                const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/all");
                 const data = await res.json();
                 if (data.data) {
                     setProducts(data.data);
@@ -136,7 +136,7 @@ const ShowProducts = () => {
                                 <td>{product.category?.name || product.parent}</td>
                                 <td className="d-flex flex-row gap-1 align-items-center justify-content-center">
                                     <a
-                                        href={`${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`}
+                                        href={`https://ecommerce-frontend-jy5o.vercel.app/product-details/${product._id}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="btn btn-sm btn-info"
