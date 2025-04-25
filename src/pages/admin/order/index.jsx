@@ -19,9 +19,9 @@ const OrderManagement = () => {
                         <h3>Order Management</h3>
 
                         {view === "addOrder" ? (
-                            <button className="btn btn-primary" onClick={() => setView('showOrder')}>Pending</button>
+                            <button className="btn btn-primary" onClick={() => setView('showOrder')}>Pending Orders</button>
                         ) : (
-                            <button className="btn btn-primary" onClick={() => setView('addOrder')}>Add Order</button>
+                            <button className="btn btn-primary" onClick={() => setView('addOrder')}>All Orders</button>
                         )}
                     </div>
 

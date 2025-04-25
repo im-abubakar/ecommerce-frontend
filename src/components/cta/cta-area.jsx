@@ -1,20 +1,41 @@
-import React from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-// internal
 import { AnimatedLine } from '@/svg';
+import React from 'react';
+// internal
 import shape_1 from '@assets/img/subscribe/subscribe-shape-1.png';
 import shape_2 from '@assets/img/subscribe/subscribe-shape-2.png';
 import shape_3 from '@assets/img/subscribe/subscribe-shape-3.png';
 import shape_4 from '@assets/img/subscribe/subscribe-shape-4.png';
 import plane from '@assets/img/subscribe/plane.png';
+// import your shapes and svg...
 
 function Shape({ img, num }) {
-  return (
-    <Image className={`tp-subscribe-shape-${num}`} src={img} alt="shape" />
-  );
+  return <Image className={`tp-subscribe-shape-${num}`} src={img} alt="shape" />;
 }
 
 const CtaArea = () => {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:5000/api/subscribe/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      console.log("data is",data);
+      setMessage(data.message || data.error);
+      setEmail('');
+    } catch (err) {
+      setMessage('Something went wrong!');
+    }
+  };
+
   return (
     <section className="tp-subscribe-area pt-70 pb-65 theme-bg p-relative z-index-1">
       <div className="tp-subscribe-shape">
@@ -37,12 +58,19 @@ const CtaArea = () => {
           </div>
           <div className="col-xl-5 col-lg-5">
             <div className="tp-subscribe-form">
-              <form action="#">
+              <form onSubmit={handleSubscribe}>
                 <div className="tp-subscribe-input">
-                  <input type="email" placeholder="Enter Your Email" />
+                  <input
+                    type="email"
+                    placeholder="Enter Your Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                   <button type="submit">Subscribe</button>
                 </div>
               </form>
+              {message && <p className="mt-2">{message}</p>}
             </div>
           </div>
         </div>
