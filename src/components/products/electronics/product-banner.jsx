@@ -67,8 +67,8 @@ const ProductBanner = () => {
                         <span className="tp-product-banner-subtitle">{item.subtitle}</span>
                         <h3 className="tp-product-banner-title">{item.title}</h3>
                         <div className="tp-product-banner-price mb-40">
-                          <span className="old-price">${item.oldPrice.toFixed(2)}</span>
-                          <p className="new-price">${item.newPrice.toFixed(2)}</p>
+                          <span className="old-price">Rs.{item.oldPrice.toFixed(2)}</span>
+                          <p className="new-price">Rs.{item.newPrice.toFixed(2)}</p>
                         </div>
                         <div className="tp-product-banner-btn">
                           <Link href="/shop" className="tp-btn tp-btn-2">Shop now</Link>

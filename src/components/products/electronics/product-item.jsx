@@ -131,9 +131,9 @@ const ProductItem = ({ product, offer_style = false }) => {
           <div className="tp-product-price-wrapper">
             {discount > 0 ? (
               <>
-                <span className="tp-product-price old-price">${price}</span>
+                <span className="tp-product-price old-price">Rs.{price}</span>
                 <span className="tp-product-price new-price">
-                  {" "} ${(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                  {" "} Rs.{(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
                 </span>
               </>
             ) : (

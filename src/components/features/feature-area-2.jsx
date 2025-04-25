@@ -12,11 +12,7 @@ export const feature_data = [
     title: 'Return & Refund',
     subtitle: 'Money back guarantee'
   },
-  {
-    icon: <Discount />,
-    title: 'Member Discount',
-    subtitle: 'Onevery order over $140.00'
-  },
+
   {
     icon: <Support />,
     title: 'Support 24/7',

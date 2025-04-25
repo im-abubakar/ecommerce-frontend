@@ -69,13 +69,13 @@ const WeeksFeatured = () => {
                 <div className="tp-featured-price-wrapper">
                   {discount > 0 ? (
                     <>
-                      <span className="tp-featured-price new-price">${price}</span>
+                      <span className="tp-featured-price new-price">Rs.{price}</span>
                       <span className="tp-featured-price old-price">
-                        {" "} $ {(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                        {" "} Rs. {(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
                       </span>
                     </>
                   ) : (
-                    <span className="tp-featured-price new-price">${price}</span>
+                    <span className="tp-featured-price new-price">Rs.{price}</span>
                   )}
                 </div>
                 <div className="tp-product-rating-icon tp-product-rating-icon-2">

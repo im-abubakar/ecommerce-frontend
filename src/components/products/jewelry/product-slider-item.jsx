@@ -82,7 +82,7 @@ const ProductSliderItem = ({ product }) => {
           <Link href={`/product-details/${_id}`}>{title}</Link>
         </h3>
         <div className="tp-category-price-wrapper-4">
-          <span className="tp-category-price-4">${price.toFixed(2)}</span>
+          <span className="tp-category-price-4">Rs.{price.toFixed(2)}</span>
           <div className="tp-category-add-to-cart">
             {isAddedToCart ? (
               <Link href="/cart" className="tp-category-add-to-cart-4">
