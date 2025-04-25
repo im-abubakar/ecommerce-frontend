@@ -11,7 +11,7 @@ const ShowProducts = () => {
     const [editProductData, setEditProductData] = useState({});
 
     const handleCopy = (product) => {
-        const url = `${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`;
+        const url = `https://ecommerce-frontend-jy5o.vercel.app/product-details/${product._id}`;
         navigator.clipboard.writeText(url);
         toast.success('Product URL copied to clipboard!');
     };
