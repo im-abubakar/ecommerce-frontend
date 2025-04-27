@@ -16,12 +16,17 @@ function BannerCard({ banner, getBannerById, fetchBanners }) {
   
   const handleDeleteClick = async (id) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL || "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com"}/api/admin/deleteBanner/${id}`,
-        {
-          method: 'DELETE',
-        }
-      );
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com";
+
+      if (!process.env.NEXT_PUBLIC_API_URL) {
+        console.warn("Warning: Using fallback API URL. Check your .env setup.");
+      }
+      
+      const response = await fetch(`${baseUrl}/api/admin/deleteBanner/${id}`, {
+        method: 'DELETE',
+      });
+      
+      
 
       const data = await response.json();
 

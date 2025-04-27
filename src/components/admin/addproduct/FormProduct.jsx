@@ -45,8 +45,9 @@ const FormProduct = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/category/all");
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/all`);
                 const data = await res.json();
+                
                 if (data.result) {
                     setCategories(data.result);
                 }
@@ -122,13 +123,14 @@ const FormProduct = () => {
                 img: uploadedImageUrl || '',
             };
 
-            const response = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/add', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formDataToSend),
             });
+            
 
             const data = await response.json();
 

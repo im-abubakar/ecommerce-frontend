@@ -136,7 +136,7 @@ const ShowProducts = () => {
                                 <td>{product.category?.name || product.parent}</td>
                                 <td className="d-flex flex-row gap-1 align-items-center justify-content-center">
                                     <a
-                                        href={`https://ecommerce-frontend-jy5o.vercel.app/product-details/${product._id}`}
+                                        href={`${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="btn btn-sm btn-info"
