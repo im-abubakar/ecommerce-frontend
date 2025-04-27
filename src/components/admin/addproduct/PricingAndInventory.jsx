@@ -24,8 +24,8 @@ const PricingAndInventory = ({ formData, handleChange, errors }) => {
                     <input
                         type="number"
                         className="form-control"
-                        name="discount"
-                        value={formData.discount}
+                        name="previousPrice"
+                        value={formData.previousPrice}
                         onChange={handleChange}
                         min="0"
                         

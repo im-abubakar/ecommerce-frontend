@@ -194,14 +194,14 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               />
             </div>
             <div className="col-md-4 mb-3 mb-md-0">
-              <label className="form-label">Discount</label>
+              <label className="form-label">Previous Price</label>
               <input
                 type="number"
-                name="discount"
-                value={productData.discount}
+                name="previousPrice"
+                value={productData.previousPrice?productData.previousPrice:""}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Enter discount if any"
+                placeholder="Enter previous price if any"
               />
             </div>
             <div className="col-md-4">

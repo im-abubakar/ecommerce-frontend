@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const FormProduct = () => {
+    const [images, setImages] = useState([]);
+
     const [formData, setFormData] = useState({
         title: '',
         slug: '',
@@ -18,10 +20,11 @@ const FormProduct = () => {
         parent: '',
         children: '',
         price: '',
-        discount: 0,
+        previousPrice: 0,
         quantity: 0,
         status: 'in-stock',
         img: null,
+        imageURL: [],
         videoId: '',
         tags: [],
         featured: false,
@@ -45,9 +48,9 @@ const FormProduct = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/all`);
+                const res = await fetch(`http://localhost:5000/api/category/all`);
                 const data = await res.json();
-                
+
                 if (data.result) {
                     setCategories(data.result);
                 }
@@ -72,7 +75,7 @@ const FormProduct = () => {
             parent: '',
             children: '',
             price: '',
-            discount: 0,
+            previousPrice: 0,
             quantity: 0,
             status: 'in-stock',
             img: null,
@@ -88,7 +91,9 @@ const FormProduct = () => {
             key: '',
             value: ''
         });
+        setImages([]);
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -97,40 +102,23 @@ const FormProduct = () => {
         setIsSubmitting(true);
 
         try {
-            let uploadedImageUrl = '';
 
-            if (formData.img) {
-                const cloudinaryFormData = new FormData();
-                cloudinaryFormData.append('file', formData.img);
-                cloudinaryFormData.append('upload_preset', 'ecommerce');
 
-                const cloudinaryResponse = await fetch('https://api.cloudinary.com/v1_1/dkwz3oo3t/image/upload', {
-                    method: 'POST',
-                    body: cloudinaryFormData,
-                });
-
-                const cloudinaryData = await cloudinaryResponse.json();
-
-                if (cloudinaryResponse.ok) {
-                    uploadedImageUrl = cloudinaryData.secure_url;
-                } else {
-                    throw new Error(cloudinaryData.error?.message || 'Failed to upload image');
-                }
-            }
+            console.log("Form data before submission:", formData);
 
             const formDataToSend = {
                 ...formData,
-                img: uploadedImageUrl || '',
+                img: formData.imageURL[0], // Use the first image for the main image
             };
+            console.log("Form data before submission:", formDataToSend);
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/add`, {
+            const response = await fetch(`http://localhost:5000/api/product/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formDataToSend),
             });
-            
 
             const data = await response.json();
 
@@ -138,16 +126,17 @@ const FormProduct = () => {
                 throw new Error(data.message || 'Failed to create product');
             }
 
-            toast.success("✅ Product created successfully!");
+            toast.success("Product created successfully!");
             resetForm();
 
         } catch (error) {
             console.error('Submission error:', error);
-            toast.error(`❌ ${error.message || "An error occurred. Check console."}`);
+            toast.error(`${error.message || "An error occurred. Check console."}`);
         } finally {
             setIsSubmitting(false);
         }
     };
+
 
 
 
@@ -235,7 +224,7 @@ const FormProduct = () => {
 
                         <hr className="my-4" />
 
-                        <Media formData={formData} handleChange={handleChange} errors={errors} />
+                        <Media formData={formData} handleChange={handleChange} errors={errors} images={images} setImages={setImages} />
                         <hr className="my-4" />
 
                         <div className="row mb-4">
@@ -286,7 +275,7 @@ const FormProduct = () => {
 
                         {/* Form Submission */}
                         <div className="d-flex justify-content-end mt-5">
-                            <button
+                            {images.length > 0 && (<button
                                 type="submit"
                                 className="btn btn-primary px-4 py-2"
                                 disabled={isSubmitting}
@@ -299,7 +288,7 @@ const FormProduct = () => {
                                 ) : (
                                     'Create Product'
                                 )}
-                            </button>
+                            </button>)}
                         </div>
                     </form>
                 </div>

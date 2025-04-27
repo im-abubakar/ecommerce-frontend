@@ -7,7 +7,7 @@ import ShowProducts from '@/components/admin/addproduct/ShowProducts';
 import AdminProtectedRoute from '@/components/auth/AdminProtectedRoute';
 
 const ProductManagement = () => {
-  const [view, setView] = useState('list'); // 'form' or 'list'
+  const [view, setView] = useState('list'); 
 
   return (
     <AdminProtectedRoute>

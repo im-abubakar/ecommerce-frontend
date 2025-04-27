@@ -7,7 +7,7 @@ import RelatedProducts from "./related-products";
 
 const ProductDetailsArea = ({ productItem }) => {
   console.log(productItem)
-  const { _id, img, imageURLs, videoId,status } = productItem || {};
+  const { _id, img, imageURL, videoId,status } = productItem || {};
   const [activeImg, setActiveImg] = useState(img);
   const dispatch = useDispatch();
   // active image change when img change
@@ -17,7 +17,7 @@ const ProductDetailsArea = ({ productItem }) => {
 
   // handle image active
   const handleImageActive = (item) => {
-    setActiveImg(item.img);
+    setActiveImg(item);
   };
   return (
     <section className="tp-product-details-area">
@@ -29,7 +29,7 @@ const ProductDetailsArea = ({ productItem }) => {
               <DetailsThumbWrapper
                 activeImg={activeImg}
                 handleImageActive={handleImageActive}
-                imageURLs={imageURLs}
+                imageURL={imageURL}
                 imgWidth={580}
                 imgHeight={670}
                 videoId={videoId}

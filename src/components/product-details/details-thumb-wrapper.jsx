@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PopupVideo from "../common/popup-video";
 
 const DetailsThumbWrapper = ({
-  imageURLs,
+  imageURL,
   handleImageActive,
   activeImg,
   imgWidth = 416,
@@ -17,14 +17,14 @@ const DetailsThumbWrapper = ({
       <div className="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
         <nav>
           <div className="nav nav-tabs flex-sm-column">
-            {imageURLs?.map((item, i) => (
+            {imageURL?.map((item, i) => (
               <button
                 key={i}
-                className={`nav-link ${item.img === activeImg ? "active" : ""}`}
+                className={`nav-link ${item === activeImg ? "active" : ""}`}
                 onClick={() => handleImageActive(item)}
               >
                 <Image
-                  src={item.img}
+                  src={item}
                   alt="image"
                   width={78}
                   height={100}
