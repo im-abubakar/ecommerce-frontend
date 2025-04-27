@@ -91,13 +91,13 @@ const CheckoutBillingArea = ({ register, errors }) => {
             </div>
             <div className="col-md-6">
               <div className="tp-checkout-input">
-                <label>Postcode ZIP</label>
+                <label>Postal code (optional)</label>
                 <input
                   {...register("zipCode")}
                   name="zipCode"
                   id="zipCode"
                   type="text"
-                  placeholder="Postcode ZIP"
+                  placeholder="Postal code"
                 />
                 <ErrorMsg msg={errors?.zipCode?.message} />
               </div>
@@ -120,7 +120,7 @@ const CheckoutBillingArea = ({ register, errors }) => {
                 />
                 <ErrorMsg msg={errors?.contactNo?.message} />
               </div>
-            
+
 
 
 
@@ -140,20 +140,18 @@ const CheckoutBillingArea = ({ register, errors }) => {
                 />
               </div>
             </div>
-            <div className="col-md-12">
-              <div className="tp-checkout-input">
-                <label>Order notes (optional)</label>
-                <textarea
-                  {...register("orderNote", { required: false })}
-                  name="orderNote"
-                  id="orderNote"
-                  placeholder="Notes about your order, e.g. special notes for delivery."
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
+      <div className="col-md-12">
+        <h5>Shipping Method (COD)</h5>
+        <div className="d-flex justify-content-between align-items-center border rounded p-3">
+          <span>Standard</span>
+          <strong>FREE</strong>
+        
+        </div>
+      </div>
+
     </div>
   );
 };

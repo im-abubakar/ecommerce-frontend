@@ -116,7 +116,7 @@ const SingleOrder = ({ params }) => {
                       <p className="tp-font-medium text-uppercase">{paymentMethod}</p>
                     </div>
                   </div>
-                  <div className="col-lg-3 col-md-4">
+                  {/* <div className="col-lg-3 col-md-4">
                     <div className="invoice__shippint-cost mb-30">
                       <h5 className="mb-0">Delivery Cost</h5>
                       <p className="tp-font-medium">Rs.{shippingCost}</p>
@@ -127,10 +127,10 @@ const SingleOrder = ({ params }) => {
                       <h5 className="mb-0">Discount</h5>
                       <p className="tp-font-medium">Rs.{discount.toFixed(2)}</p>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-lg-3 col-md-4">
                     <div className="invoice__total-ammount mb-30">
-                      <h5 className="mb-0">Total Ammount</h5>
+                      <h5 className="mb-0">Total Amount</h5>
                       <p className="tp-font-medium text-danger">
                         <strong>Rs.{parseInt(totalAmount).toFixed(2)}</strong>
                       </p>

@@ -20,7 +20,7 @@ const Subscription = () => {
   const fetchSubscribers = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/subscribe/all");
+      const response = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/subscribe/all");
       const data = await response.json();
       console.log("data is", data.subscribers);
       setSubscribers(data.subscribers);
@@ -54,7 +54,7 @@ const Subscription = () => {
     if (!confirmDelete) return;
   
     try {
-      const response = await fetch(`http://localhost:5000/api/subscribe/delete/${id}`, {
+      const response = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/subscribe/delete/${id}`, {
         method: "DELETE",
       });
   

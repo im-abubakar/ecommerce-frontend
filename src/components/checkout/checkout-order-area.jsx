@@ -39,8 +39,11 @@ const CheckoutOrderArea = ({ checkoutData }) => {
             </li>
           ))}
 
-          {/* Shipping */}
-          <li className="tp-order-info-list-shipping">
+          {/* 
+          
+          
+          */}
+          {/* <li className="tp-order-info-list-shipping">
             <span>Shipping</span>
             <div className="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
               <span>
@@ -62,7 +65,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
                 </label>
                 <ErrorMsg msg={errors?.shippingOption?.message} />
               </span>
-              {/* <span>
+              <span>
                 <input
                   {...register(`shippingOption`, {
                     required: `Shipping Option is required!`,
@@ -78,9 +81,9 @@ const CheckoutOrderArea = ({ checkoutData }) => {
                   Delivery: 7 Days Cost: <span>Rs.20.00</span>
                 </label>
                 <ErrorMsg msg={errors?.shippingOption?.message} />
-              </span> */}
+              </span>
             </div>
-          </li>
+          </li> */}
 
           {/* Subtotal */}
           <li className="tp-order-info-list-subtotal">
@@ -89,16 +92,16 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           </li>
 
           {/* Shipping cost */}
-          <li className="tp-order-info-list-subtotal">
+          {/* <li className="tp-order-info-list-subtotal">
             <span>Delivery Cost</span>
             <span>Rs.{shippingCost.toFixed(2)}</span>
-          </li>
+          </li> */}
 
           {/* Discount */}
-          <li className="tp-order-info-list-subtotal">
+          {/* <li className="tp-order-info-list-subtotal">
             <span>Discount</span>
             <span>Rs.{discountAmount.toFixed(2)}</span>
-          </li>
+          </li> */}
 
           {/* Total */}
           <li className="tp-order-info-list-total">
@@ -108,7 +111,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
         </ul>
       </div>
 
-      <div className="tp-checkout-payment">
+      {/* <div className="tp-checkout-payment">
         <div className="tp-checkout-payment-item">
           <input
             {...register(`payment`, {
@@ -123,7 +126,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           <label htmlFor="cod">Cash on Delivery</label>
           <ErrorMsg msg={errors?.payment?.message} />
         </div>
-      </div>
+      </div> */}
 
       <div className="tp-checkout-btn-wrapper">
         <button
