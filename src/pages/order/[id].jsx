@@ -49,7 +49,7 @@ const SingleOrder = ({ params }) => {
                         <div className="col-md-4 col-sm-6">
                           <div className="invoice__left">
                             {/* <Image src={logo} alt="logo" /> */}
-                            <p> <br /> Jahania, Pakistan </p>
+                            <p> <br /> Multan, Pakistan </p>
                           </div>
                         </div>
                         <div className="col-md-8 col-sm-6">

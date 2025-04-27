@@ -58,7 +58,7 @@ const WeeksFeatured = () => {
     content = (
       <Swiper {...slider_setting} modules={[Navigation]} className="tp-featured-slider-active swiper-container">
         {product_items.map((item) => {
-          const {_id, img, title, price, discount, reviews } = item || {};
+          const { _id, img, title, price, discount, reviews } = item || {};
           return (
             <SwiperSlide key={item._id} className="tp-featured-item white-bg p-relative z-index-1">
               <div className="tp-featured-thumb include-bg" style={{ backgroundImage: `url(${img})` }} data-background="assets/img/product/slider/product-slider-1.jpg"></div>
@@ -67,15 +67,15 @@ const WeeksFeatured = () => {
                   <Link href={`/product-details/${_id}`}>{title}</Link>
                 </h3>
                 <div className="tp-featured-price-wrapper">
-                  {discount > 0 ? (
+                  {previousPrice > price ? (
                     <>
-                      <span className="tp-featured-price new-price">Rs.{price}</span>
-                      <span className="tp-featured-price old-price">
-                        {" "} Rs. {(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                      <span className="tp-product-details-price old-price">Rs.{previousPrice}</span>
+                      <span className="tp-product-details-price new-price">
+                        {" "}Rs.{price}
                       </span>
                     </>
                   ) : (
-                    <span className="tp-featured-price new-price">Rs.{price}</span>
+                    <span className="tp-product-details-price new-price">Rs.{price.toFixed(2)}</span>
                   )}
                 </div>
                 <div className="tp-product-rating-icon tp-product-rating-icon-2">

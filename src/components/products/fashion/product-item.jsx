@@ -11,7 +11,7 @@ import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { add_to_compare } from "@/redux/features/compareSlice";
 
 const ProductItem = ({ product, style_2 = false }) => {
-  const { _id, img, category, title, reviews, price, discount, tags, status } = product || {};
+  const { _id, img, category, title, reviews, price, discount, tags, status , previousPrice } = product || {};
   const [ratingVal, setRatingVal] = useState(0);
   const { cart_products } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -125,20 +125,16 @@ const ProductItem = ({ product, style_2 = false }) => {
           <Rating allowFraction size={16} initialValue={ratingVal} readonly={true} />
         </div>
         <div className="tp-product-price-wrapper-2">
-          {discount > 0 ? (
-            <>
-              <span className="tp-product-price-2 new-price">
-                Rs.{price.toFixed(2)}{" "}
-              </span>
-              <span className="tp-product-price-2 old-price">
-                {" "}Rs.{(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
-              </span>
-            </>
-          ) : (
-            <span className="tp-product-price-2 new-price">
-              Rs.{price.toFixed(2)}
+        {previousPrice > price ? (
+          <>
+            <span className="tp-product-details-price old-price">Rs.{previousPrice}</span>
+            <span className="tp-product-details-price new-price">
+              {" "}Rs.{price.toFixed(2)}
             </span>
-          )}
+          </>
+        ) : (
+          <span className="tp-product-details-price new-price">Rs.{price.toFixed(2)}</span>
+        )}
         </div>
       </div>
     </div>

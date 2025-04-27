@@ -12,7 +12,7 @@ import { add_cart_product } from "@/redux/features/cartSlice";
 import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 
 const ProductItem = ({ product, offer_style = false }) => {
-  const { _id, img, category, title, reviews, price, discount,status,offerDate } = product || {};
+  const { _id, img, category, title, reviews, price, discount, status, offerDate, previousPrice } = product || {};
 
   const { cart_products } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -129,15 +129,15 @@ const ProductItem = ({ product, offer_style = false }) => {
             </div>
           </div>
           <div className="tp-product-price-wrapper">
-            {discount > 0 ? (
+            { previousPrice > price ? (
               <>
-                <span className="tp-product-price old-price">Rs.{price}</span>
+                <span className="tp-product-price old-price">Rs.{previousPrice}</span>
                 <span className="tp-product-price new-price">
-                  {" "} Rs.{(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                  {" "} Rs.{price}
                 </span>
               </>
             ) : (
-              <span className="tp-product-price new-price">${parseFloat(price).toFixed(2)}</span>
+              <span className="tp-product-price new-price">Rs.{price}</span>
             )}
           </div>
           {offer_style && (

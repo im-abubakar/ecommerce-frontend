@@ -13,7 +13,7 @@ import { add_to_compare } from '@/redux/features/compareSlice';
 import { handleModalClose } from '@/redux/features/productModalSlice';
 
 const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBottom = false }) => {
-  const { sku, img, title, imageURLs, category, description, discount, price, status, reviews, tags, offerDate } = productItem || {};
+  const { sku, img, title, imageURLs, category, description, discount, price, status, reviews, tags, offerDate, previousPrice } = productItem || {};
   const [ratingVal, setRatingVal] = useState(0);
   const [textMore, setTextMore] = useState(false);
   const dispatch = useDispatch()
@@ -71,11 +71,12 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
 
       {/* price */}
       <div className="tp-product-details-price-wrapper mb-20">
-        {discount > 0 ? (
+       
+        {previousPrice > price ? (
           <>
-            <span className="tp-product-details-price old-price">Rs.{price}</span>
+            <span className="tp-product-details-price old-price">Rs.{previousPrice}</span>
             <span className="tp-product-details-price new-price">
-              {" "}Rs.{(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+              {" "}Rs.{price}
             </span>
           </>
         ) : (

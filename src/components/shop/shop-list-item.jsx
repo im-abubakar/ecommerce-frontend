@@ -11,7 +11,7 @@ import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { add_to_compare } from "@/redux/features/compareSlice";
 
 const ShopListItem = ({ product }) => {
-  const { _id, img, category, title, reviews, price, discount, tags, description } = product || {};
+  const { _id, img, category, title, reviews, price, discount, tags, description , previousPrice} = product || {};
   const dispatch = useDispatch()
   const [ratingVal, setRatingVal] = useState(0);
   useEffect(() => {
@@ -61,7 +61,7 @@ const ShopListItem = ({ product }) => {
             </button>
             <button
               type="button"
-              onClick={()=> handleWishlistProduct(product)}
+              onClick={() => handleWishlistProduct(product)}
               className="tp-product-action-btn-2 tp-product-add-to-wishlist-btn"
             >
               <Wishlist />
@@ -71,7 +71,7 @@ const ShopListItem = ({ product }) => {
             </button>
             <button
               type="button"
-              onClick={()=> handleCompareProduct(product)}
+              onClick={() => handleCompareProduct(product)}
               className="tp-product-action-btn-2 tp-product-add-to-compare-btn"
             >
               <CompareThree />
@@ -94,15 +94,15 @@ const ShopListItem = ({ product }) => {
             <Rating allowFraction size={16} initialValue={ratingVal} readonly={true} />
           </div>
           <div className="tp-product-price-wrapper-2">
-            {discount > 0 ? (
+            {previousPrice > price ? (
               <>
-                <span className="tp-product-price-2 new-price">Rs.{price}</span>
-                <span className="tp-product-price-2 old-price">
-                  {" "} Rs.{(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                <span className="tp-product-details-price old-price">Rs.{previousPrice}</span>
+                <span className="tp-product-details-price new-price">
+                  {" "}Rs.{price}
                 </span>
               </>
             ) : (
-              <span className="tp-product-price-2 new-price">Rs.{price}</span>
+              <span className="tp-product-details-price new-price">Rs.{price.toFixed(2)}</span>
             )}
           </div>
           <p>

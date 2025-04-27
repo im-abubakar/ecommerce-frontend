@@ -52,8 +52,25 @@ const handleCloseCartMini = () => {
                     <h5 className="cartmini__title">
                       <Link href={`/product-details/${item._id}`}>{item.title}</Link>
                     </h5>
+
                     <div className="cartmini__price-wrapper">
-                      {item.discount > 0 ? <span className="cartmini__price">Rs.{(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toFixed(2)}</span> : <span className="cartmini__price">Rs.{item.price.toFixed(2)}</span>}
+
+
+                    {item.previousPrice > item.price ? (
+                        <>
+                          <span className="tp-product-details-price old-price">Rs.{item.previousPrice}</span>
+                          <span className="tp-product-details-price new-price">
+                            {" "}Rs.{item.price}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="tp-product-details-price new-price">Rs.{item.price.toFixed(2)}</span>
+                      )}
+
+                      {/* {item.discount > 0 ?
+                       <span className="cartmini__price">Rs.{(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toFixed(2)}</span> : <span className="cartmini__price">Rs.{item.price.toFixed(2)}</span>} */}
+
+
                       <span className="cartmini__quantity">{" "}x{item.orderQuantity}</span>
                     </div>
                   </div>
