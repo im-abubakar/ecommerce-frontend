@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-const Media = ({ formData, handleChange, errors,images, setImages }) => {
+const Media = ({ formData, handleChange, errors, images, setImages, isUploaded, setIsUploaded }) => {
   const [isUploading, setIsUploading] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
   const [uploadError, setUploadError] = useState(null); // New state for handling errors
 
   const handleImageChange = (e) => {
@@ -39,7 +38,7 @@ const Media = ({ formData, handleChange, errors,images, setImages }) => {
           cloudinaryFormData.append('file', image.img);
           cloudinaryFormData.append('upload_preset', 'ecommerce');
 
-          return fetch('https://api.cloudinary.com/v1_1/dkwz3oo3t/image/upload', {
+          return fetch('https://api.cloudinary.com/v1_1/dyfhi3avq/image/upload', {
             method: 'POST',
             body: cloudinaryFormData,
           })

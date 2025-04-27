@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const FormProduct = () => {
     const [images, setImages] = useState([]);
+    const [isUploaded, setIsUploaded] = useState(false);
+
 
     const [formData, setFormData] = useState({
         title: '',
@@ -64,6 +66,7 @@ const FormProduct = () => {
 
 
     const resetForm = () => {
+
         setFormData({
             title: '',
             slug: '',
@@ -98,7 +101,10 @@ const FormProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
-
+        if (!isUploaded) {
+            toast.error('Please click the Upload Images button first!');
+            return;
+        }
         setIsSubmitting(true);
 
         try {
@@ -224,7 +230,7 @@ const FormProduct = () => {
 
                         <hr className="my-4" />
 
-                        <Media formData={formData} handleChange={handleChange} errors={errors} images={images} setImages={setImages} />
+                        <Media formData={formData} handleChange={handleChange} errors={errors} images={images} setImages={setImages} isUploaded={isUploaded} setIsUploaded={setIsUploaded} />
                         <hr className="my-4" />
 
                         <div className="row mb-4">

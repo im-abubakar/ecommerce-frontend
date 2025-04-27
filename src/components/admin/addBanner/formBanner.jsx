@@ -52,7 +52,7 @@ const FormBanner = ({ setView }) => {
         formData.append('file', bannerData.img);
         formData.append('upload_preset', 'ecommerce');
 
-        const res = await fetch('https://api.cloudinary.com/v1_1/dkwz3oo3t/image/upload', {
+        const res = await fetch('https://api.cloudinary.com/v1_1/dyfhi3avq/image/upload', {
           method: 'POST',
           body: formData,
         });
