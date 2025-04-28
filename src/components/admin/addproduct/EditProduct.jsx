@@ -6,6 +6,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
   // Initialize toast notifications
   const notifySuccess = () => toast.success("Product updated successfully!");
   const notifyError = (message) => toast.error(message);
+  // console.log(productData);
 
   const handleSubmit = async () => {
     try {
@@ -25,7 +26,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
         }
       }
 
-      const response = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/edit/${productData._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/edit/${productData._id}`, {
         method: 'PATCH',
         body: formData,
       });
@@ -136,45 +137,38 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
           <div className="row mb-3">
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="form-label">Product Type</label>
-              <select
-                name="type"
-                value={productData.type || ""}
+              <input
+                type="text"
+                name="productType"
+                value={productData.productType}
                 onChange={handleChange}
-                className="form-select"
-              >
-                <option value="">Select type</option>
-                <option value="type1">Type 1</option>
-                <option value="type2">Type 2</option>
-                <option value="type3">Type 3</option>
-              </select>
+                className="form-control"
+                placeholder="Enter product type"
+              />
             </div>
+
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="form-label">Parent Category</label>
-              <select
+              <input
+                type="text"
                 name="parent"
-                value={productData.parent || ""}
+                value={productData.parent}
                 onChange={handleChange}
-                className="form-select"
-              >
-                <option value="">Select parent</option>
-                <option value="parent1">Parent 1</option>
-                <option value="parent2">Parent 2</option>
-                <option value="parent3">Parent 3</option>
-              </select>
+                className="form-control"
+                placeholder="Parent Category"
+              />
             </div>
+
             <div className="col-md-4">
               <label className="form-label">Child Category</label>
-              <select
-                name="child"
-                value={productData.child || ""}
+              <input
+                type="text"
+                name="children"
+                value={productData.children}
                 onChange={handleChange}
-                className="form-select"
-              >
-                <option value="">Select child</option>
-                <option value="child1">Child 1</option>
-                <option value="child2">Child 2</option>
-                <option value="child3">Child 3</option>
-              </select>
+                className="form-control"
+                placeholder="Child Category"
+              />
             </div>
           </div>
 
@@ -194,14 +188,14 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               />
             </div>
             <div className="col-md-4 mb-3 mb-md-0">
-              <label className="form-label">Previous Price</label>
+              <label className="form-label">SKU</label>
               <input
-                type="number"
-                name="previousPrice"
-                value={productData.previousPrice?productData.previousPrice:""}
+                type="text"
+                name="sku"
+                value={productData.sku}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Enter previous price if any"
+                placeholder="Enter SKU"
               />
             </div>
             <div className="col-md-4">
@@ -216,43 +210,64 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               />
             </div>
           </div>
-          <div className="mb-3">
-            <label className="form-label">Status</label>
-            <select
-              name="status"
-              value={productData.status || ""}
-              onChange={handleChange}
-              className="form-select"
-            >
-              <option value="">Select status</option>
-              <option value="active">Active</option>
-              <option value="out-of-stock">Out of Stock</option>
-              <option value="inactive">Inactive</option>
-            </select>
+
+          {/* STATUS TOGGLES */}
+          <h5 className="mb-3 mt-4">Status</h5>
+          <div className="row mb-3">
+            <div className="col-4 d-flex align-items-center">
+              <label className="form-label me-2 mb-0">Featured:</label>
+              <input
+                type="checkbox"
+                name="featured"
+                checked={productData.featured}
+                onChange={(e) =>
+                  handleChange({ target: { name: 'featured', value: e.target.checked } })
+                }
+              />
+            </div>
+            <div className="col-4 d-flex align-items-center">
+              <label className="form-label me-2 mb-0">Active:</label>
+              <input
+                type="checkbox"
+                name="active"
+                checked={productData.active}
+                onChange={(e) =>
+                  handleChange({ target: { name: 'active', value: e.target.checked } })
+                }
+              />
+            </div>
+            <div className="col-4 d-flex align-items-center">
+              <label className="form-label me-2 mb-0">Trending:</label>
+              <input
+                type="checkbox"
+                name="trending"
+                checked={productData.trending}
+                onChange={(e) =>
+                  handleChange({ target: { name: 'trending', value: e.target.checked } })
+                }
+              />
+            </div>
           </div>
 
           {/* MEDIA */}
           <h5 className="mb-3 mt-4">Media</h5>
           <div className="row mb-3">
-            <div className="col-md-6 mb-3 mb-md-0">
-              <label className="form-label">Main Product Image</label>
-              <input
-                type="file"
-                name="mainImage"
-                onChange={handleChange}
-                className="form-control"
-              />
-            </div>
-            <div className="col-md-6">
-              <label className="form-label">YouTube Video ID</label>
-              <input
-                type="text"
-                name="videoId"
-                value={productData.videoId}
-                onChange={handleChange}
-                className="form-control"
-                placeholder="e.g., dQw4w9WgXcQ"
-              />
+            <div className="col-md-12">
+              <label className="form-label">Product Images</label>
+              <div className="d-flex flex-wrap gap-2">
+                { productData.imageURL ? (
+                  productData.imageURL.map((url, index) => (
+                    <img
+                      key={index}
+                      src={url}
+                      alt={`Product ${index}`}
+                      style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '5px' }}
+                    />
+                  ))
+                ) : (
+                  <p>No images uploaded</p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -268,6 +283,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
         </div>
       </div>
     </div>
+
   );
 };
 
