@@ -19,7 +19,7 @@ const ShowBanner = () => {
 
   const fetchBanners = async () => {
     try {
-      const response = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/admin/fetchBanners`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/fetchBanners`);
       if (!response.ok) {
         throw new Error('Error fetching banners: ' + response.statusText);
       }
@@ -38,7 +38,7 @@ const ShowBanner = () => {
 
   const getBannerById = async (id) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com"}/api/admin/getBanner/${id}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/getBanner/${id}`);
       if (!response.ok) {
         throw new Error('Error fetching banner: ' + response.statusText);
       }

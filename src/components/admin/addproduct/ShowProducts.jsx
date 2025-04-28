@@ -45,7 +45,7 @@ const ShowProducts = ({ products, setProducts }) => {
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/${productId}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/${productId}`, {
                 method: 'DELETE',
             });
             const data = await res.json();

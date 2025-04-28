@@ -20,22 +20,30 @@ const Subscription = () => {
   const fetchSubscribers = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/subscribe/all");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/subscribe/all`);
       const data = await response.json();
-      console.log("data is", data.subscribers);
-      setSubscribers(data.subscribers);
+      console.log("data is", data);
+      setSubscribers(data.subscribers || []); 
     } catch (error) {
       toast.error("Failed to fetch subscribers");
+      setSubscribers([]); // <-- also set empty array on error
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
+  
 
   const exportToExcel = () => {
     if (subscribers.length === 0) {
       toast.warn("No subscribers to export.");
       return;
     }
-    const ws = XLSX.utils.json_to_sheet(subscribers);
+    
+    const formattedData = subscribers.map(email => ({
+      Email: email
+    }));
+  
+    const ws = XLSX.utils.json_to_sheet(formattedData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Subscribers");
     const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
@@ -43,6 +51,7 @@ const Subscription = () => {
     saveAs(fileData, "subscribers.xlsx");
     toast.success("Excel file downloaded!");
   };
+  
 
   const onDelete = async (id) => {
     if (!id) {
@@ -54,7 +63,7 @@ const Subscription = () => {
     if (!confirmDelete) return;
   
     try {
-      const response = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/subscribe/delete/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/subscribe/delete/${id}`, {
         method: "DELETE",
       });
   

@@ -5,26 +5,27 @@ import Wrapper from '@/layout/wrapper';
 import React, { useEffect, useState } from 'react';
 import ShowProducts from '@/components/admin/addproduct/ShowProducts';
 import AdminProtectedRoute from '@/components/auth/AdminProtectedRoute';
+import { toast } from 'react-toastify';
 
 const ProductManagement = () => {
-  const [view, setView] = useState('list'); 
-    const [products, setProducts] = useState([]);
+  const [view, setView] = useState('list');
+  const [products, setProducts] = useState([]);
 
-   useEffect(() => {
-          const fetchProducts = async () => {
-              try {
-                  const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/all");
-                  const data = await res.json();
-                  if (data.data) {
-                      setProducts(data.data);
-                  }
-              } catch (error) {
-                  toast.error("Failed to fetch products.");
-              }
-          };
-  
-          fetchProducts();
-      }, []);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/all`);
+        const data = await res.json();
+        if (data.data) {
+          setProducts(data.data);
+        }
+      } catch (error) {
+        toast.error("Failed to fetch products.");
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <AdminProtectedRoute>
@@ -33,7 +34,7 @@ const ProductManagement = () => {
         <main className="main-content py-0">
           <Navbar />
 
-          <div className="px-4 py-3 d-flex justify-content-between" style={{backgroundColor:"#cecece"}}>
+          <div className="px-4 py-3 d-flex justify-content-between" style={{ backgroundColor: "#cecece" }}>
             <h3>Product Management</h3>
 
             {view === 'list' && (

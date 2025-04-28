@@ -9,7 +9,7 @@ const ShowOrder = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/order/get-orders");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/order/get-orders`);
         const data = await res.json();
         if (data.success && data.data) {
           setOrders(data.data);

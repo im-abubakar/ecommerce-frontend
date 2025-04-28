@@ -16,13 +16,9 @@ function BannerCard({ banner, getBannerById, fetchBanners }) {
   
   const handleDeleteClick = async (id) => {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com";
-
-      if (!process.env.NEXT_PUBLIC_API_URL) {
-        console.warn("Warning: Using fallback API URL. Check your .env setup.");
-      }
+      const confirmDelete = window.confirm("Are you sure you want to delete this banner?"); 
       
-      const response = await fetch(`${baseUrl}/api/admin/deleteBanner/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/deleteBanner/${id}`, {
         method: 'DELETE',
       });
       

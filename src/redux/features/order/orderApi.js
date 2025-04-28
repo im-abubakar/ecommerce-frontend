@@ -7,7 +7,7 @@ export const authApi = apiSlice.injectEndpoints({
     // createPaymentIntent
     createPaymentIntent: builder.mutation({
       query: (data) => ({
-        url: `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/order/create-payment-intent`,
+        url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/order/create-payment-intent`,
         method: "POST",
         body: data,
       }),
@@ -25,7 +25,7 @@ export const authApi = apiSlice.injectEndpoints({
     // saveOrder
     saveOrder: builder.mutation({
       query: (data) => ({
-        url: `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/order/saveOrder`,
+        url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/order/saveOrder`,
         method: "POST",
         body: data,
       }),
@@ -46,13 +46,13 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     // getUserOrders
     getUserOrders: builder.query({
-      query: () => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/user-order`,
+      query: () => `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user-order`,
       providesTags:["UserOrders"],
       keepUnusedDataFor: 600,
     }),
     // getUserOrders
     getUserOrderById: builder.query({
-      query: (id) => `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/user-order/${id}`,
+      query: (id) => `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user-order/${id}`,
       providesTags: (result, error, arg) => [{ type: "UserOrder", id: arg }],
       keepUnusedDataFor: 600,
     }),

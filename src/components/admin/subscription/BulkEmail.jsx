@@ -12,7 +12,7 @@ export const BulkEmail = () => {
         }
 
         try {
-            const response = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/subscribe/send", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/subscribe/send`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
