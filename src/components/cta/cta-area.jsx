@@ -21,7 +21,7 @@ const CtaArea = () => {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/subscribe/add', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/subscribe/add`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

@@ -54,9 +54,8 @@ function EditBanner({ banner, setEditForm, setShowEdit }) {
         img: imgUrl,
       };
 
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://frozen-beach-97514-4e7308ffaf33.herokuapp.com";
 
-      const response = await fetch(`${API_BASE_URL}/api/admin/updateBanner/${banner._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/updateBanner/${banner._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

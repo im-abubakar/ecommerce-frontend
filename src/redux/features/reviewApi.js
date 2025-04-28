@@ -6,7 +6,7 @@ export const reviewApi = apiSlice.injectEndpoints({
     addReview: builder.mutation({
       query: (data) => ({
 
-        url: `https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/review/add`,
+        url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/review/add`,
         method: "POST",
         body: data,
       }),
