@@ -137,7 +137,7 @@ function BannerCard({ banner, getBannerById, fetchBanners }) {
         <div className="col-xl-5 col-lg-6 col-md-6">
           <div className="tp-slider-content p-relative z-index-1">
             <span className={`${theme === darkTheme ? "text-white" : "text-dark"}`}>
-              {pre_title.text} <b>${pre_title.price}</b>
+              {pre_title.text} <b>Rs.{pre_title.price}</b>
             </span>
             <h3 className={`tp-slider-title ${theme === darkTheme ? "text-white" : "text-dark"}`}>{title}</h3>
             <p className={`${theme === darkTheme ? "text-white" : "text-dark"}`}>

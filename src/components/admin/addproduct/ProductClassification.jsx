@@ -49,6 +49,7 @@ const ProductClassification = ({ formData, setFormData, categories }) => {
             name="productType"
             value={formData.productType}
             onChange={handleChange}
+            required
           >
             <option value="">Select Type</option>
             {uniqueTypes.map((type, idx) => (
@@ -64,6 +65,7 @@ const ProductClassification = ({ formData, setFormData, categories }) => {
             name="parent"
             value={formData.parent}
             onChange={handleChange}
+            required
           >
             <option value="">Select Parent Category</option>
             {uniqueParents.map((parent, idx) => (
@@ -82,6 +84,7 @@ const ProductClassification = ({ formData, setFormData, categories }) => {
             value={formData.children}
             onChange={handleChange}
             disabled={!formData.parent}
+            required
           >
             <option value="">Select Child Category</option>
             {childCategories.map((child, idx) => (

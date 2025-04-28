@@ -105,18 +105,22 @@ const FormProduct = () => {
             toast.error('Please click the Upload Images button first!');
             return;
         }
+        if (!formData.productType || !formData.parent || !formData.children) {
+            toast.error('Please fill out all classification fields!');
+            return;
+          }
         setIsSubmitting(true);
 
         try {
 
 
-            console.log("Form data before submission:", formData);
+            // console.log("Form data before submission:", formData);
 
             const formDataToSend = {
                 ...formData,
                 img: formData.imageURL[0], // Use the first image for the main image
             };
-            console.log("Form data before submission:", formDataToSend);
+            // console.log("Form data before submission:", formDataToSend);
 
             const response = await fetch(`https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/add`, {
                 method: 'POST',

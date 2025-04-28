@@ -5,8 +5,7 @@ import { FaClipboard, FaEye } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ShowProducts = () => {
-    const [products, setProducts] = useState([]);
+const ShowProducts = ({ products, setProducts }) => {
     const [showEdit, setShowEdit] = useState(false);
     const [editProductData, setEditProductData] = useState({});
 
@@ -16,21 +15,7 @@ const ShowProducts = () => {
         toast.success('Product URL copied to clipboard!');
     };
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const res = await fetch("https://frozen-beach-97514-4e7308ffaf33.herokuapp.com/api/product/all");
-                const data = await res.json();
-                if (data.data) {
-                    setProducts(data.data);
-                }
-            } catch (error) {
-                toast.error("Failed to fetch products.");
-            }
-        };
 
-        fetchProducts();
-    }, []);
 
     useEffect(() => {
         if (showEdit) {
