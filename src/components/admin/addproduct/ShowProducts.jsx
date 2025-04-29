@@ -98,6 +98,7 @@ const ShowProducts = ({ products, setProducts }) => {
                         <th>Title</th>
                         <th>Category</th>
                         <th>Product Url</th>
+                        <th>Prev Price</th>
                         <th>Price</th>
                         <th>Qty</th>
                         <th>Status</th>
@@ -135,6 +136,7 @@ const ShowProducts = ({ products, setProducts }) => {
                                         <FaClipboard />
                                     </button>
                                 </td>
+                                <td>Rs.{product.previousPrice}</td>
                                 <td>Rs.{product.price}</td>
                                 <td>{product.quantity}</td>
                                 <td>

@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EditProduct = ({ setShowEdit, productData, setProductData }) => {
-  // Initialize toast notifications
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/category/all`);
+      const data = await res.json();
+      if (data.result) {
+        setCategories(data.result);
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  const uniqueTypes = [...new Set(categories.map(cat => cat.productType).filter(Boolean))];
+  const uniqueParents = [...new Set(categories.map(cat => cat.parent).filter(Boolean))];
+  const selectedParent = categories.find(cat => cat.parent === productData.parent);
+  const childCategories = selectedParent ? selectedParent.children : [];
+
   const notifySuccess = () => toast.success("Product updated successfully!");
   const notifyError = (message) => toast.error(message);
-  // console.log(productData);
 
   const handleSubmit = async () => {
     try {
@@ -37,12 +58,11 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
         throw new Error(data.message || 'Something went wrong!');
       }
 
-      notifySuccess(); // Show success toast
+      notifySuccess();
       setShowEdit(false);
-
     } catch (error) {
       console.error('Error updating product:', error);
-      notifyError('Failed to update product: ' + error.message); // Show error toast
+      notifyError('Failed to update product: ' + error.message);
     }
   };
 
@@ -137,38 +157,53 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
           <div className="row mb-3">
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="form-label">Product Type</label>
-              <input
-                type="text"
+              <select
                 name="productType"
                 value={productData.productType}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Enter product type"
-              />
+              >
+                <option value="">Select Product Type</option>
+                {uniqueTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="form-label">Parent Category</label>
-              <input
-                type="text"
+              <select
                 name="parent"
                 value={productData.parent}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Parent Category"
-              />
+              >
+                <option value="">Select Parent</option>
+                {uniqueParents.map((parent) => (
+                  <option key={parent} value={parent}>
+                    {parent}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="col-md-4">
               <label className="form-label">Child Category</label>
-              <input
-                type="text"
+              <select
                 name="children"
                 value={productData.children}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Child Category"
-              />
+              >
+                <option value="">Select Child</option>
+                {childCategories.map((child) => (
+                  <option key={child} value={child}>
+                    {child}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -220,9 +255,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
                 type="checkbox"
                 name="featured"
                 checked={productData.featured}
-                onChange={(e) =>
-                  handleChange({ target: { name: 'featured', value: e.target.checked } })
-                }
+                onChange={handleChange}
               />
             </div>
             <div className="col-4 d-flex align-items-center">
@@ -231,9 +264,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
                 type="checkbox"
                 name="active"
                 checked={productData.active}
-                onChange={(e) =>
-                  handleChange({ target: { name: 'active', value: e.target.checked } })
-                }
+                onChange={handleChange}
               />
             </div>
             <div className="col-4 d-flex align-items-center">
@@ -242,9 +273,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
                 type="checkbox"
                 name="trending"
                 checked={productData.trending}
-                onChange={(e) =>
-                  handleChange({ target: { name: 'trending', value: e.target.checked } })
-                }
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -255,7 +284,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
             <div className="col-md-12">
               <label className="form-label">Product Images</label>
               <div className="d-flex flex-wrap gap-2">
-                { productData.imageURL ? (
+                {productData.imageURL ? (
                   productData.imageURL.map((url, index) => (
                     <img
                       key={index}
@@ -278,12 +307,11 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
             </button>
             <button type="button" className="btn btn-secondary" onClick={() => setShowEdit(false)}>
               Cancel
-            </button>
+              </button>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 

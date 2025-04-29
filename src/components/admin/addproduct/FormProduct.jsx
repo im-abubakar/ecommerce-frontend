@@ -114,7 +114,8 @@ const FormProduct = () => {
         try {
 
 
-            // console.log("Form data before submission:", formData);
+
+            console.log("Form data before submission:", formData);
 
             const formDataToSend = {
                 ...formData,
