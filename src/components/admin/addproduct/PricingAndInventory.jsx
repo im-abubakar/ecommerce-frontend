@@ -23,12 +23,9 @@ const PricingAndInventory = ({ formData, handleChange, errors }) => {
                     <label className="form-label">Previous Price</label>
                     <input
                         type="number"
-                        className="form-control"
                         name="previousPrice"
-                        value={formData.previousPrice}
+                        value={formData.previousPrice || ""}
                         onChange={handleChange}
-                        min="0"
-                        
                     />
                 </div>
                 <div className="col-md-3 mb-3">
