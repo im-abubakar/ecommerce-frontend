@@ -6,7 +6,7 @@ import { useGetProductTypeCategoryQuery } from "@/redux/features/categoryApi";
 import ErrorMsg from "@/components/common/error-msg";
 import Loader from "@/components/loader/loader";
 
-const HeaderCategory = ({ isCategoryActive, categoryType = "electronics" }) => {
+const HeaderCategory = ({ isCategoryActive, categoryType = "fashion" }) => {
   const {
     data: categories,
     isError,

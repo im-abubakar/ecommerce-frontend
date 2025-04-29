@@ -15,6 +15,7 @@ import BlogArea from "@/components/blog/electronic/blog-area";
 import InstagramArea from "@/components/instagram/instagram-area";
 import CtaArea from "@/components/cta/cta-area";
 import Footer from "@/layout/footers/footer";
+import FashionCategory from "@/components/categories/fashion-category";
 
 export default function Home() {
   return (
@@ -22,13 +23,13 @@ export default function Home() {
       <SEO pageTitle='Home'/>
       <Header/>
       <HomeHeroSlider/>
-      <ElectronicCategory/>
+      <FashionCategory/>
       <FeatureArea/>
       <ProductArea/>
       <BannerArea/>
       {/* <OfferProducts/> */}
       <ProductGadgetArea/>
-      <ProductBanner/>
+      {/* <ProductBanner/> */}
        <NewArrivals/>
       <ProductSmArea/>
       <BlogArea/>

@@ -10,7 +10,7 @@ import ProductItem from "@/components/products/electronics/product-item";
 
 const Menus = () => {
   const { data: products, isError, isLoading } = useGetProductTypeQuery({
-    type: 'electronics',
+    type: 'fashion',
     query: 'new=true'
   });
   

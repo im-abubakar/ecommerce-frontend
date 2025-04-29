@@ -5,12 +5,13 @@ import ProductItem from "./product-item";
 import ErrorMsg from "@/components/common/error-msg";
 import HomePrdLoader from "@/components/loader/home/home-prd-loader";
 
-const tabs = ["new", "featured", "topSellers"];
+// const tabs = ["new", "featured", "topSellers"];
+const tabs = ["trending", "active", "featured"];
 
 const ProductArea = () => {
   const [activeTab, setActiveTab] = useState("new");
-  const {data:products,isError,isLoading,refetch} = 
-  useGetProductTypeQuery({type:'electronics',query:`${activeTab}=true`});
+  const { data: products, isError, isLoading, refetch } =
+    useGetProductTypeQuery({ type: 'fashion', query: `${activeTab}=true` });
 
   // handleActiveTab
   const handleActiveTab = (tab) => {
@@ -19,14 +20,14 @@ const ProductArea = () => {
   // refetch when active value change
   useEffect(() => {
     refetch()
-  },[activeTab,refetch])
+  }, [activeTab, refetch])
 
   // decide what to render
   let content = null;
 
   if (isLoading) {
     content = (
-      <HomePrdLoader loading={isLoading}/>
+      <HomePrdLoader loading={isLoading} />
     );
   }
   if (!isLoading && isError) {
@@ -37,10 +38,10 @@ const ProductArea = () => {
   }
   if (!isLoading && !isError && products?.data?.length > 0) {
     const product_items = products.data;
-    content = product_items.map((prd,i) => (
+    content = product_items.map((prd, i) => (
       <div key={i} className="col-xl-3 col-lg-3 col-sm-6">
-        <ProductItem product={prd}/>  
-    </div>
+        <ProductItem product={prd} />
+      </div>
     ))
   }
   return (
@@ -62,11 +63,9 @@ const ProductArea = () => {
                   <li key={i} className="nav-item">
                     <button
                       onClick={() => handleActiveTab(tab)}
-                      className={`nav-link text-capitalize ${
-                        activeTab === tab ? "active" : ""
-                      }`}
+                      className={`nav-link text-capitalize ${activeTab === tab ? "active" : ""}`}
                     >
-                      {tab.split("-").join(" ")}
+                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
                       <span className="tp-product-tab-line">
                         <TabLine />
                       </span>
@@ -74,6 +73,7 @@ const ProductArea = () => {
                   </li>
                 ))}
               </ul>
+
             </div>
           </div>
         </div>

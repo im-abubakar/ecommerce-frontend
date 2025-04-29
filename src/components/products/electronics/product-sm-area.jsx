@@ -7,7 +7,7 @@ import ProductSmItem from './product-sm-item';
 import HomeSmPrdLoader from '@/components/loader/home/home-sm-prd-loader';
 
 const ProductSmArea = () => {
-  const { data: products, isError, isLoading, refetch } = useGetProductTypeQuery({type:'electronics'});
+  const { data: products, isError, isLoading, refetch } = useGetProductTypeQuery({type:'fashion'});
   // decide what to render
   let content = null;
 
@@ -23,7 +23,7 @@ const ProductSmArea = () => {
     content = <ErrorMsg msg="No Products found!" />;
   }
   if (!isLoading && !isError && products?.data?.length > 0) {
-    const discount_prd = products.data.filter(p => p.discount > 0).slice(0, 3);
+    const discount_prd = products.data.filter(p => p.previousPrice > p.price).slice(0, 3);
     const featured_prd = products.data.filter(p => p.featured).slice(0, 3);
     const selling_prd = products.data.slice().sort((a, b) => b.sellCount - a.sellCount).slice(0, 3);
     content = <div className="row">

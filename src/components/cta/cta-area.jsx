@@ -52,7 +52,7 @@ const CtaArea = () => {
         <div className="row align-items-center">
           <div className="col-xl-7 col-lg-7">
             <div className="tp-subscribe-content">
-              <span>Sale 20% off all store</span>
+              <span>Sale 10% off all store</span>
               <h3 className="tp-subscribe-title">Subscribe our Newsletter</h3>
             </div>
           </div>

@@ -15,7 +15,7 @@ import gadget_girl from '@assets/img/product/gadget/gadget-girl.png';
 import HomeGadgetPrdLoader from '@/components/loader/home/home-gadget-prd-loader';
 
 const ProductGadgetArea = () => {
-  const { data: products, isError, isLoading } = useGetProductTypeQuery({type:'electronics'});
+  const { data: products, isError, isLoading } = useGetProductTypeQuery({type:'fashion'});
 
   // decide what to render
   let content = null;
@@ -53,8 +53,8 @@ const ProductGadgetArea = () => {
     }
 
     const banner_data = [
-      { bg: b_bg_1, title: <>Selected novelty <br /> Products</>, price: 99 },
-      { bg: b_bg_2, title: <>Top Rated <br /> Products</>, price: 55 },
+      { bg: b_bg_1, title: <>Selected novelty <br /> Products</>, price: 4000 },
+      { bg: b_bg_2, title: <>Top Rated <br /> Products</>, price: 5000 },
     ]
     return (
       <Swiper {...settings} effect='fade' modules={[Pagination, EffectFade]} className="tp-product-gadget-banner-slider-active swiper-container">
@@ -62,7 +62,7 @@ const ProductGadgetArea = () => {
           <SwiperSlide key={i} className="tp-product-gadget-banner-item include-bg" 
           style={{ backgroundImage: `url(${b.bg.src})`}}>
             <div className="tp-product-gadget-banner-content">
-              <span className="tp-product-gadget-banner-price">Only ${b.price.toFixed(2)}</span>
+              <span className="tp-product-gadget-banner-price">Only Rs.{b.price.toFixed(0)}</span>
               <h3 className="tp-product-gadget-banner-title">
                 <Link href="/shop">{b.title}</Link>
               </h3>
@@ -84,7 +84,7 @@ const ProductGadgetArea = () => {
                   <div className="tp-product-gadget-thumb">
                     <Image src={gadget_girl} alt="gadget_girl img" priority />
                   </div>
-                  <h3 className="tp-product-gadget-categories-title">Electronics <br /> Gadgets</h3>
+                  <h3 className="tp-product-gadget-categories-title">Fashion <br /> Gadgets</h3>
 
                   <div className="tp-product-gadget-categories-list">
                     <PrdCategoryList />
