@@ -24,12 +24,12 @@ const CartCheckout = () => {
       <div className="tp-cart-checkout-shipping">
         <h4 className="tp-cart-checkout-shipping-title">Delivering</h4>
         <div className="tp-cart-checkout-shipping-option-wrapper">
-          <div className="tp-cart-checkout-shipping-option">
+          {/* <div className="tp-cart-checkout-shipping-option">
             <input id="flat_rate" type="radio" name="shipping"/>
             <label htmlFor="flat_rate" onClick={()=> handleShippingCost(200)}>
               Flat rate: <span>Rs.200.00</span>
             </label>
-          </div>
+          </div> */}
           {/* <div className="tp-cart-checkout-shipping-option">
             <input id="local_pickup" type="radio" name="shipping" />
             <label htmlFor="local_pickup" onClick={()=> handleShippingCost(25)}>

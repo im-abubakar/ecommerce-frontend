@@ -83,7 +83,7 @@ const useCheckoutSubmit = () => {
     discountProductType,
   ]);
 
- 
+
   const handleCouponCode = (e) => {
     e.preventDefault();
 
@@ -135,6 +135,7 @@ const useCheckoutSubmit = () => {
     setShippingCost(value);
   };
 
+
   useEffect(() => {
     setValue("firstName", shipping_info.firstName);
     setValue("lastName", shipping_info.lastName);
@@ -148,6 +149,7 @@ const useCheckoutSubmit = () => {
   }, [user, setValue, shipping_info]);
 
   const submitHandler = async (data) => {
+    console.log("his this data", data);
     dispatch(set_shipping(data));
     setIsCheckoutSubmit(true);
 
@@ -162,7 +164,6 @@ const useCheckoutSubmit = () => {
       shippingOption: data.shippingOption,
       status: "Pending",
       cart: cart_products,
-      paymentMethod: data.payment,
       subTotal: total,
       shippingCost: shippingCost,
       discount: discountAmount,
@@ -171,19 +172,31 @@ const useCheckoutSubmit = () => {
       user: user?._id || null,
     };
 
-    if (data.payment === "COD") {
-      saveOrder(orderInfo).then((res) => {
-        if (res?.error) {
-          // Optional: handle error
-        } else {
-          localStorage.removeItem("cart_products");
-          localStorage.removeItem("couponInfo");
+
+  console.log("Order Info:", orderInfo);
+
+    // if (data.payment === "COD") {
+      saveOrder(orderInfo)
+        .then((res) => {
+          console.log("Order response:", res);
+          if (res?.error) {
+            notifyError("Something went wrong while placing your order.");
+            setIsCheckoutSubmit(false);
+          } else {
+            localStorage.removeItem("cart_products");
+            localStorage.removeItem("couponInfo");
+            setIsCheckoutSubmit(false);
+            notifySuccess("Your Order Confirmed!");
+            router.push(`/order/${res.data?.order?._id}`);
+          }
+        })
+        .catch((err) => {
+          console.error("Save order failed:", err);
+          notifyError("Failed to place order. Try again.");
           setIsCheckoutSubmit(false);
-          notifySuccess("Your Order Confirmed!");
-          router.push(`/order/${res.data?.order?._id}`);
-        }
-      });
-    }
+        });
+    // }
+
   };
 
   return {

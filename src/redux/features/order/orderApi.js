@@ -25,7 +25,7 @@ export const authApi = apiSlice.injectEndpoints({
     // saveOrder
     saveOrder: builder.mutation({
       query: (data) => ({
-        url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/order/saveOrder`,
+        url: `http://localhost:5000/api/order/saveOrder`,
         method: "POST",
         body: data,
       }),

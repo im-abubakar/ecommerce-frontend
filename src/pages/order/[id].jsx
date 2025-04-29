@@ -26,7 +26,7 @@ const SingleOrder = ({ params }) => {
     content = <ErrorMsg msg="There was an error" />;
   }
   if (!isLoading && !isError) {
-    const { name, country, city, contact, invoice, createdAt, cart, shippingCost, discount, totalAmount,paymentMethod} = order.order;
+    const { name, country, city, contact, invoice, createdAt, cart, shippingCost, discount, totalAmount} = order.order;
     content = (
       <>
         <section className="invoice__area pt-120 pb-120">
@@ -113,7 +113,7 @@ const SingleOrder = ({ params }) => {
                   <div className="col-lg-3 col-md-4">
                     <div className="invoice__payment-method mb-30">
                       <h5 className="mb-0">Payment Method</h5>
-                      <p className="tp-font-medium text-uppercase">{paymentMethod}</p>
+                      {/* <p className="tp-font-medium text-uppercase">{paymentMethod}</p> */}
                     </div>
                   </div>
                   {/* <div className="col-lg-3 col-md-4">

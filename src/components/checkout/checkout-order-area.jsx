@@ -86,10 +86,10 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           </li> */}
 
           {/* Subtotal */}
-          <li className="tp-order-info-list-subtotal">
+          {/* <li className="tp-order-info-list-subtotal">
             <span>Subtotal</span>
             <span>Rs.{total.toFixed(2)}</span>
-          </li>
+          </li> */}
 
           {/* Shipping cost */}
           {/* <li className="tp-order-info-list-subtotal">
