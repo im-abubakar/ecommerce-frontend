@@ -27,7 +27,6 @@ const PricingAndInventory = ({ formData, handleChange, errors }) => {
                         name="previousPrice"
                         value={formData.previousPrice}
                         onChange={handleChange}
-                        required
                         min="0"
                         
                     />
