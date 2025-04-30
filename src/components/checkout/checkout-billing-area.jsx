@@ -125,7 +125,7 @@ const CheckoutBillingArea = ({ register, errors }) => {
 
 
             </div>
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
                   Email address
@@ -139,7 +139,7 @@ const CheckoutBillingArea = ({ register, errors }) => {
                   defaultValue={user?.email}
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
