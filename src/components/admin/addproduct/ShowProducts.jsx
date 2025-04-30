@@ -45,7 +45,7 @@ const ShowProducts = ({ products, setProducts, fetchProducts }) => {
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`https://www.sastamal.store/api/product/${productId}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/${productId}`, {
                 method: 'DELETE',
             });
             const data = await res.json();
@@ -123,7 +123,7 @@ const ShowProducts = ({ products, setProducts, fetchProducts }) => {
                                 <td>{product.parent}</td>
                                 <td className="d-flex flex-row gap-1 align-items-center justify-content-center">
                                     <a
-                                        href={`${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`}
+                                        href={`https://www.sastamal.store/product-details/${product._id}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="btn btn-sm btn-info"
