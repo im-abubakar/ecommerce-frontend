@@ -1,9 +1,36 @@
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const EditProduct = ({ setShowEdit, productData, setProductData }) => {
+const EditProduct = ({ setShowEdit, productData, setProductData, fetchProducts }) => {
+  console.log("EditProduct component rendered with productData:", productData);
   const [categories, setCategories] = useState([]);
+  const [formData, setFormData] = useState({
+    title: productData.title || '',
+    sku: productData.sku || '',
+    slug: productData.slug || '',
+    description: productData.description || '',
+    productType: productData.productType || '',
+    brand: productData.brand || '',
+    category: productData.category.name || '',
+    parent: productData.parent || '',
+    children: productData.children || [],
+    price: productData.price || '',
+    previousPrice: productData.previousPrice || 0,
+    quantity: productData.quantity || 0,  // Initialize from productData too
+    status: productData.status || 'in-stock',
+    img: productData.img || "",
+    imageURL: productData.imageURL, // ✅ Get existing image URLs
+    videoId: productData.videoId || '',
+    featured: productData.featured || false,
+    trending: productData.trending || false,
+    active: productData.active || true,
+
+    key: '',
+    value: ''
+  });
+
 
   useEffect(() => {
     fetchCategories();
@@ -31,25 +58,14 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
 
   const handleSubmit = async () => {
     try {
-      const formData = new FormData();
-
-      for (const key in productData) {
-        const value = productData[key];
-
-        if (key === "tags" && Array.isArray(value)) {
-          value.forEach((tag, index) => {
-            formData.append(`tags[${index}]`, tag);
-          });
-        } else if (key === "mainImage" && value instanceof File) {
-          formData.append(key, value);
-        } else {
-          formData.append(key, value);
-        }
-      }
+      // console.log("Form data before submission:", formData);
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/edit/${productData._id}`, {
         method: 'PATCH',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json', // Tell server it's JSON
+        },
+        body: JSON.stringify(formData), // Convert to JSON string
       });
 
       const data = await response.json();
@@ -57,7 +73,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
       if (!response.ok) {
         throw new Error(data.message || 'Something went wrong!');
       }
-
+      fetchProducts();
       notifySuccess();
       setShowEdit(false);
     } catch (error) {
@@ -66,6 +82,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
     }
   };
 
+
   const generateSlug = (text) => {
     return text
       .toLowerCase()
@@ -73,10 +90,10 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
       .trim()
       .replace(/\s+/g, "-");
   };
-
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
 
+    // First determine the new value
     let newValue;
     if (type === "checkbox") {
       newValue = checked;
@@ -88,14 +105,18 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
       newValue = value;
     }
 
-    setProductData(prev => {
+
+    setFormData(prev => {
       const updatedData = {
         ...prev,
         [name]: newValue
       };
-
-      if (name === "title" && (!prev.slug || prev.slug === generateSlug(prev.title))) {
-        updatedData.slug = generateSlug(value);
+      // ✅ Auto-update slug when title changes
+      if (name === "title") {
+        // Only update slug if slug is empty or matches old title's slug
+        if (!prev.slug || prev.slug === generateSlug(prev.title)) {
+          updatedData.slug = generateSlug(value);
+        }
       }
 
       return updatedData;
@@ -132,7 +153,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="text"
                 name="title"
-                value={productData.title}
+                value={formData.title}
                 onChange={handleChange}
                 className="form-control"
                 placeholder="Enter product title"
@@ -144,7 +165,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="text"
                 name="slug"
-                value={productData.slug}
+                value={formData.slug}
                 onChange={handleChange}
                 className="form-control"
                 placeholder="Auto-generated or custom slug"
@@ -159,7 +180,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <label className="form-label">Product Type</label>
               <select
                 name="productType"
-                value={productData.productType}
+                value={formData.productType}
                 onChange={handleChange}
                 className="form-control"
               >
@@ -176,7 +197,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <label className="form-label">Parent Category</label>
               <select
                 name="parent"
-                value={productData.parent}
+                value={formData.parent}
                 onChange={handleChange}
                 className="form-control"
               >
@@ -193,7 +214,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <label className="form-label">Child Category</label>
               <select
                 name="children"
-                value={productData.children}
+                value={formData.children}
                 onChange={handleChange}
                 className="form-control"
               >
@@ -215,10 +236,22 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="number"
                 name="price"
-                value={productData.price}
+                value={formData.price}
                 onChange={handleChange}
                 className="form-control"
                 placeholder="Enter price"
+                required
+              />
+            </div>
+            <div className="col-md-4 mb-3 mb-md-0">
+              <label className="form-label">Price *</label>
+              <input
+                type="number"
+                name="previousPrice"
+                value={formData.previousPrice}
+                onChange={handleChange}
+                className="form-control"
+                placeholder="Enter previous price"
                 required
               />
             </div>
@@ -227,7 +260,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="text"
                 name="sku"
-                value={productData.sku}
+                value={formData.sku}
                 onChange={handleChange}
                 className="form-control"
                 placeholder="Enter SKU"
@@ -238,7 +271,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="number"
                 name="quantity"
-                value={productData.quantity}
+                value={formData.quantity}
                 onChange={handleChange}
                 className="form-control"
                 placeholder="Enter available quantity"
@@ -254,7 +287,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="checkbox"
                 name="featured"
-                checked={productData.featured}
+                checked={formData.featured}
                 onChange={handleChange}
               />
             </div>
@@ -263,7 +296,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="checkbox"
                 name="active"
-                checked={productData.active}
+                checked={formData.active}
                 onChange={handleChange}
               />
             </div>
@@ -272,7 +305,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
               <input
                 type="checkbox"
                 name="trending"
-                checked={productData.trending}
+                checked={formData.trending}
                 onChange={handleChange}
               />
             </div>
@@ -284,21 +317,37 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
             <div className="col-md-12">
               <label className="form-label">Product Images</label>
               <div className="d-flex flex-wrap gap-2">
-                {productData.imageURL ? (
+                {productData.imageURL && productData.imageURL.length > 1 ? (
+                  // ✅ Show all images from imageURL array
                   productData.imageURL.map((url, index) => (
-                    <img
+                    <Image
                       key={index}
                       src={url}
-                      alt={`Product ${index}`}
-                      style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '5px' }}
+                      alt={`Image ${index + 1}`}
+                      className="img-thumbnail"
+                      style={{ maxHeight: '150px' }}
+                      width={150}
+                      height={150}
                     />
                   ))
+                ) : productData.img ? (
+                  // ✅ Show single image from img variable
+                  <Image
+                    src={productData.img}
+                    alt="Product Image"
+                    className="img-thumbnail"
+                    style={{ maxHeight: '150px' }}
+                    width={150}
+                    height={150}
+                  />
                 ) : (
+                  // ❌ No images uploaded
                   <p>No images uploaded</p>
                 )}
               </div>
             </div>
           </div>
+
 
           {/* ACTION BUTTONS */}
           <div className="d-flex justify-content-between mt-4">
@@ -307,7 +356,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData }) => {
             </button>
             <button type="button" className="btn btn-secondary" onClick={() => setShowEdit(false)}>
               Cancel
-              </button>
+            </button>
           </div>
         </div>
       </div>

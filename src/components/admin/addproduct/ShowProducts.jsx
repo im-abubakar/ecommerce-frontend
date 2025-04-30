@@ -5,7 +5,7 @@ import { FaClipboard, FaEye } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ShowProducts = ({ products, setProducts }) => {
+const ShowProducts = ({ products, setProducts, fetchProducts }) => {
     const [showEdit, setShowEdit] = useState(false);
     const [editProductData, setEditProductData] = useState({});
 
@@ -83,6 +83,7 @@ const ShowProducts = ({ products, setProducts }) => {
                     }}
                 >
                     <EditProduct
+                        fetchProducts={fetchProducts}
                         setShowEdit={setShowEdit}
                         productData={editProductData}
                         setProductData={setEditProductData}
@@ -119,7 +120,7 @@ const ShowProducts = ({ products, setProducts }) => {
                                     />
                                 </td>
                                 <td>{product.title}</td>
-                                <td>{product.category?.name || product.parent}</td>
+                                <td>{product.parent}</td>
                                 <td className="d-flex flex-row gap-1 align-items-center justify-content-center">
                                     <a
                                         href={`${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`}

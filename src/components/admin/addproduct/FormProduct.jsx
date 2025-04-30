@@ -99,6 +99,7 @@ const FormProduct = () => {
 
 
     const handleSubmit = async (e) => {
+        
         e.preventDefault();
         if (!validateForm()) return;
         if (!isUploaded) {

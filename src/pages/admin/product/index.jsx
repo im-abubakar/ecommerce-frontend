@@ -11,18 +11,18 @@ const ProductManagement = () => {
   const [view, setView] = useState('list');
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/all`);
-        const data = await res.json();
-        if (data.data) {
-          setProducts(data.data);
-        }
-      } catch (error) {
-        toast.error("Failed to fetch products.");
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/all`);
+      const data = await res.json();
+      if (data.data) {
+        setProducts(data.data);
       }
-    };
+    } catch (error) {
+      toast.error("Failed to fetch products.");
+    }
+  };
+  useEffect(() => {
 
     fetchProducts();
   }, []);
@@ -55,7 +55,7 @@ const ProductManagement = () => {
             )}
           </div>
 
-          {view === 'form' ? <FormProduct /> : <ShowProducts setProducts={setProducts} products={products} />}
+          {view === 'form' ? <FormProduct /> : <ShowProducts setProducts={setProducts} products={products} fetchProducts={fetchProducts}/>}
         </main>
       </Wrapper>
     </AdminProtectedRoute>
