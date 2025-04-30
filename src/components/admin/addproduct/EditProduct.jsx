@@ -244,7 +244,7 @@ const EditProduct = ({ setShowEdit, productData, setProductData, fetchProducts }
               />
             </div>
             <div className="col-md-4 mb-3 mb-md-0">
-              <label className="form-label">Price *</label>
+              <label className="form-label">Previous Price </label>
               <input
                 type="number"
                 name="previousPrice"
