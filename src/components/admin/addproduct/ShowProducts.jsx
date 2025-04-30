@@ -10,7 +10,7 @@ const ShowProducts = ({ products, setProducts, fetchProducts }) => {
     const [editProductData, setEditProductData] = useState({});
 
     const handleCopy = (product) => {
-        const url = `${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`;
+        const url = `https://www.sastamal.store/product-details/${product._id}`;
         navigator.clipboard.writeText(url);
         toast.success('Product URL copied to clipboard!');
     };
@@ -45,7 +45,7 @@ const ShowProducts = ({ products, setProducts, fetchProducts }) => {
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product/${productId}`, {
+            const res = await fetch(`https://www.sastamal.store/api/product/${productId}`, {
                 method: 'DELETE',
             });
             const data = await res.json();
