@@ -18,7 +18,7 @@ function BannerCard({ banner, getBannerById, fetchBanners }) {
     try {
       const confirmDelete = window.confirm("Are you sure you want to delete this banner?"); 
       
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/deleteBanner/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/deleteBanner/${id}`, {
         method: 'DELETE',
       });
       

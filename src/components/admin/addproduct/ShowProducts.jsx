@@ -10,7 +10,7 @@ const ShowProducts = ({ products, setProducts, fetchProducts }) => {
     const [editProductData, setEditProductData] = useState({});
 
     const handleCopy = (product) => {
-        const url = `${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`;
+        const url = `https://www.sastamal.store/product-details/${product._id}`;
         navigator.clipboard.writeText(url);
         toast.success('Product URL copied to clipboard!');
     };
@@ -123,7 +123,7 @@ const ShowProducts = ({ products, setProducts, fetchProducts }) => {
                                 <td>{product.parent}</td>
                                 <td className="d-flex flex-row gap-1 align-items-center justify-content-center">
                                     <a
-                                        href={`${process.env.NEXT_PUBLIC_STORE_URL}/product-details/${product._id}`}
+                                        href={`https://www.sastamal.store/product-details/${product._id}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="btn btn-sm btn-info"
