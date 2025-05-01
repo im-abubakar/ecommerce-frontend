@@ -4,7 +4,7 @@ import Link from 'next/link';
 // internal
 import social_data from '@/data/social-data';
 import { Email, Location } from '@/svg';
-import logo from '@assets/img/logo/logo.svg';
+import logo from '@assets/img/logo/logo.png';
 import pay from '@assets/img/footer/footer-pay.png';
 
 const FooterTwo = () => {
@@ -18,8 +18,9 @@ const FooterTwo = () => {
                 <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                   <div className="tp-footer-widget footer-col-4-1 mb-50">
                     <div className="tp-footer-logo">
-                      <Link href="/">
-                        <Image src={logo} alt="logo" />
+                      <Link href="/" className="d-flex justify-content-center align-items-center gap-3">
+                        <Image height={80} width={130} src={logo} alt="logo" style={{ transform: 'translateY(-4px)' }} />
+                        <span className="fw-semibold fs-3" style={{ color: '#3e4247' }}>Lets Shop.</span>
                       </Link>
                     </div>
                     <div className="tp-footer-widget-content">
