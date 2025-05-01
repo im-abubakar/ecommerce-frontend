@@ -111,7 +111,7 @@ const HeaderTopRight = () => {
   return (
     <div className="tp-header-top-menu d-flex align-items-center justify-content-end">
       <Language active={active} handleActive={handleActive} />
-      <Currency active={active} handleActive={handleActive} />
+      {/* <Currency active={active} handleActive={handleActive} /> */}
       <ProfileSetting active={active} handleActive={handleActive} />
     </div>
   );

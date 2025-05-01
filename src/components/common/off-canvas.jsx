@@ -9,7 +9,7 @@ import language_img from '@assets/img/icon/language-flag.png';
 import MobileCategory from '@/layout/headers/header-com/mobile-category';
 import MobileMenus from './mobile-menus';
 
-const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen,categoryType = "electronics" }) => {
+const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen, categoryType = "electronics" }) => {
   const [isCategoryActive, setIsCategoryActive] = useState(false);
   const [isCurrencyActive, setIsCurrencyActive] = useState(false);
   const [isLanguageActive, setIsLanguageActive] = useState(false);
@@ -64,17 +64,35 @@ const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen,categoryType = "electronic
               </div>
               <div className="offcanvas__contact-content">
                 <h3 className="offcanvas__contact-title">
-                  <a href="tel:098-852-987">004524865</a>
+                  <a href="tel:098-852-987">0310-4626389</a>
                 </h3>
               </div>
             </div>
             <div className="offcanvas__btn">
-              <Link href="/contact" className="tp-btn-2 tp-btn-border-2">Contact Us</Link>
+              <a
+                href="https://wa.me/923104626389"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  backgroundColor: '#25D366',
+                  color: '#fff',
+                  padding: '8px 12px',
+                  borderRadius: '5px',
+                  marginTop: '10px',
+                  textDecoration: 'none',
+                  fontWeight: 'bold'
+                }}
+              >
+                <i className="fab fa-whatsapp" style={{ marginRight: '8px' }}></i>
+                Chat on WhatsApp
+              </a>
             </div>
           </div>
           <div className="offcanvas__bottom">
             <div className="offcanvas__footer d-flex align-items-center justify-content-between">
-              <div className="offcanvas__currency-wrapper currency">
+              {/* <div className="offcanvas__currency-wrapper currency">
                 <span onClick={handleCurrencyActive} className="offcanvas__currency-selected-currency tp-currency-toggle" id="tp-offcanvas-currency-toggle">Currency : USD</span>
                 <ul className={`offcanvas__currency-list tp-currency-list ${isCurrencyActive ? 'tp-currency-list-open' : ''}`}>
                   <li>USD</li>
@@ -82,8 +100,8 @@ const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen,categoryType = "electronic
                   <li>BDT </li>
                   <li>INR</li>
                 </ul>
-              </div>
-              <div className="offcanvas__select language">
+              </div> */}
+              {/* <div className="offcanvas__select language">
                 <div className="offcanvas__lang d-flex align-items-center justify-content-md-end">
                   <div className="offcanvas__lang-img mr-15">
                     <Image src={language_img} alt="language-flag" />
@@ -98,7 +116,7 @@ const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen,categoryType = "electronic
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -42,8 +42,13 @@ const FashionCategory = () => {
       <div key={item._id} className="col-xxl-4 col-lg-6">
         <div className="tp-banner-item-2 p-relative z-index-1 grey-bg-2 mb-20 fix">
           <div
-            className="tp-banner-thumb-2 include-bg transition-3"
-            style={{ backgroundImage: `url(${item.img})` }}
+            className="tp-banner-thumb-2 include-bg transition-3 container-fluid"
+            style={{
+              backgroundImage: `url(${item.img})`,
+              backgroundSize: "cover", // Ensures the image covers the container
+              backgroundPosition: "center", // Centers the image
+              backgroundRepeat: "no-repeat", // Prevents tiling
+            }}
           ></div>
           <h3 className="tp-banner-title-2">
             <a

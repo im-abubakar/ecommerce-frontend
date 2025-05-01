@@ -23,11 +23,12 @@ const DetailsThumbWrapper = ({
                 className={`nav-link ${item === activeImg ? "active" : ""}`}
                 onClick={() => handleImageActive(item)}
               >
-                <Image
+                <img
                   src={item}
                   alt="image"
                   width={78}
                   height={100}
+                  className="img-fluid"
                   style={{ width: "100%", height: "100%" }}
                 />
               </button>
@@ -37,12 +38,16 @@ const DetailsThumbWrapper = ({
         <div className="tab-content m-img">
           <div className="tab-pane fade show active">
             <div className="tp-product-details-nav-main-thumb p-relative">
-              <Image
-                src={activeImg}
-                alt="product img"
-                width={imgWidth}
-                height={imgHeight}
-              />
+              <div style={{ position: 'relative', width: '100%', height: 'auto' }}>
+                <Image
+                  src={activeImg}
+                  alt="product img"
+                  layout="responsive"
+                  width={imgWidth}
+                  height={imgHeight}
+                  sizes="(max-width: 768px) 100vw, 416px"
+                />
+              </div>
               <div className="tp-product-badge">
                 {status === 'out-of-stock' && <span className="product-hot">out-stock</span>}
               </div>

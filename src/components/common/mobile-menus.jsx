@@ -11,7 +11,7 @@ const MobileMenus = () => {
   const [isActiveMenu,setIsActiveMenu] = useState("")
 
   const { data: products, isError, isLoading } = useGetProductTypeQuery({
-    type: 'electronics',
+    type: 'fashion',
     query: 'new=true'
   });
   

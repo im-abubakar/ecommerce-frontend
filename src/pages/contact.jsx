@@ -14,7 +14,7 @@ const ContactPage = () => {
       <HeaderTwo style_2={true} />
       <ContactBreadcrumb />
       <ContactArea/>
-      <ContactMap/>
+      {/* <ContactMap/> */}
       <Footer primary_style={true} />
     </Wrapper>
   );
