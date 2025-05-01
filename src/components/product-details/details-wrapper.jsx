@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
+import { FaWhatsapp } from 'react-icons/fa';
+
 // internal
 import { AskQuestion, CompareTwo, WishlistTwo } from '@/svg';
 import DetailsBottomInfo from './details-bottom-info';
@@ -71,7 +73,7 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
 
       {/* price */}
       <div className="tp-product-details-price-wrapper mb-20">
-       
+
         {previousPrice > price ? (
           <>
             <span className="tp-product-details-price old-price">Rs.{previousPrice}</span>
@@ -125,6 +127,21 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
         <Link href="/cart" onClick={() => dispatch(handleModalClose())}>
           <button className="tp-product-details-buy-now-btn w-100">Buy Now</button>
         </Link>
+        <a
+          href={`https://wa.me/923104626389?text=${encodeURIComponent(`Hi! I'm interested in the product: ${title} (SKU: ${sku})`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button
+            className="tp-product-details-add-to-cart-btn w-100"
+            style={{ backgroundColor: '#25D366', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+          >
+            <FaWhatsapp size={20} />
+            Chat on WhatsApp
+          </button>
+        </a>
+
+
       </div>
       {/* product-details-action-sm start */}
       <div className="tp-product-details-action-sm">
@@ -143,7 +160,12 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
       </div>
       {/* product-details-action-sm end */}
 
-      {detailsBottom && <DetailsBottomInfo category={category?.name} sku={sku} tag={tags[0]} />}
+      {detailsBottom && (
+        <DetailsBottomInfo
+          category={category?.name}
+          sku={sku}
+        />
+      )}
     </div>
   );
 };

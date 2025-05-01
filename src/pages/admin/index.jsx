@@ -9,6 +9,7 @@ import Wrapper from "@/layout/wrapper";
 import { useRouter } from 'next/router';
 import { jwtDecode } from 'jwt-decode';
 import AdminProtectedRoute from '@/components/auth/AdminProtectedRoute';
+import { toast } from 'react-toastify';
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
