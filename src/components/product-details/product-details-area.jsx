@@ -6,53 +6,49 @@ import DetailsTabNav from "./details-tab-nav";
 import RelatedProducts from "./related-products";
 
 const ProductDetailsArea = ({ productItem }) => {
-  console.log(productItem)
-  const { _id, img, imageURL, videoId,status } = productItem || {};
+  const { _id, img, imageURL, videoId, status } = productItem || {};
   const [activeImg, setActiveImg] = useState(img);
   const dispatch = useDispatch();
-  // active image change when img change
+
   useEffect(() => {
     setActiveImg(img);
   }, [img]);
 
-  // handle image active
   const handleImageActive = (item) => {
     setActiveImg(item);
   };
+
   return (
     <section className="tp-product-details-area">
+      {/* Product Top Section */}
       <div className="tp-product-details-top pb-115">
         <div className="container">
           <div className="row">
             <div className="col-xl-7 col-lg-6">
-              {/* product-details-thumb-wrapper start */}
               <DetailsThumbWrapper
                 activeImg={activeImg}
                 handleImageActive={handleImageActive}
                 imageURL={imageURL}
-                imgWidth={580}
-                imgHeight={670}
+                imgWidth={600}
+                imgHeight={700}
                 videoId={videoId}
                 status={status}
               />
-              {/* product-details-thumb-wrapper end */}
             </div>
             <div className="col-xl-5 col-lg-6">
-              {/* product-details-wrapper start */}
               <DetailsWrapper
                 productItem={productItem}
                 handleImageActive={handleImageActive}
                 activeImg={activeImg}
                 detailsBottom={true}
               />
-              {/* product-details-wrapper end */}
             </div>
           </div>
         </div>
       </div>
 
-      {/* product details description */}
-      <div className="tp-product-details-bottom pb-140">
+      {/* Product Description Tabs */}
+      {/* <div className="tp-product-details-bottom pb-140">
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
@@ -60,24 +56,24 @@ const ProductDetailsArea = ({ productItem }) => {
             </div>
           </div>
         </div>
-      </div>
-      {/* product details description */}
+      </div> */}
 
-      {/* related products start */}
-      <section className="tp-related-product pt-95 pb-50">
+      {/* Related Products Section */}
+      <section className="tp-related-product">
         <div className="container">
           <div className="row">
-            <div className="tp-section-title-wrapper-6 text-center mb-40">
+            <div className="tp-section-title-wrapper-6 text-center">
               <span className="tp-section-title-pre-6">Next day Products</span>
               <h3 className="tp-section-title-6">Related Products</h3>
             </div>
           </div>
           <div className="row">
-            <RelatedProducts id={_id} />
+            <div className="col-12">
+              <RelatedProducts id={_id} />
+            </div>
           </div>
         </div>
       </section>
-      {/* related products end */}
     </section>
   );
 };

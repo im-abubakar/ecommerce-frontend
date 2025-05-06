@@ -1576,3 +1576,38 @@
         }
     }
 }
+
+.h4 {
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale)* 1.5rem);
+    
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000; /* Customize navigation button color */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.profile-img {
+    width: 37px;
+    height: 37px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
+  .profile-stack {
+    margin-right: 10px;
+  }
+  .verified-badge {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }

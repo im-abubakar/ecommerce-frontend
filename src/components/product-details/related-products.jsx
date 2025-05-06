@@ -1,13 +1,13 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar, Navigation,Autoplay } from "swiper";
-// internal
+import { Scrollbar, Navigation, Autoplay } from "swiper";
 import { useGetRelatedProductsQuery } from "@/redux/features/productApi";
 import ProductItem from "../products/beauty/product-item";
 import ErrorMsg from "../common/error-msg";
 import { HomeNewArrivalPrdLoader } from "../loader";
+import useWindowSize from "@/hooks/use-window-size"; // optional custom hook
+import ProductItem1 from "../products/beauty/product-item1";
 
-// slider setting
 const slider_setting = {
   slidesPerView: 4,
   spaceBetween: 24,
@@ -37,41 +37,51 @@ const slider_setting = {
   },
 };
 
-const RelatedProducts = ({id}) => {
+const RelatedProducts = ({ id }) => {
+  const { width } = useWindowSize(); // You may use another method if no hook
   const { data: products, isError, isLoading } = useGetRelatedProductsQuery(id);
-  // decide what to render
+
   let content = null;
 
   if (isLoading) {
-    content = <HomeNewArrivalPrdLoader loading={isLoading}/>;
-  }
-  if (!isLoading && isError) {
+    content = <HomeNewArrivalPrdLoader loading={isLoading} />;
+  } else if (isError) {
     content = <ErrorMsg msg="There was an error" />;
-  }
-  if (!isLoading && !isError && products?.data?.length === 0) {
+  } else if (products?.data?.length === 0) {
     content = <ErrorMsg msg="No Products found!" />;
+  } else if (products?.data?.length > 0) {
+    const product_items = products.data.slice(0, 6); // max 6 items
+
+    // Show grid layout for small screens
+    if (width < 768) {
+      content = (
+        <div className="row">
+          {product_items.map((item) => (
+            <div className="col-6 mb-4" key={item._id}>
+              <ProductItem1 product={item} primary_style={true} />
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      // Use Swiper for larger screens
+      content = (
+        <Swiper
+          {...slider_setting}
+          modules={[Autoplay, Navigation]}
+          className="tp-product-related-slider-active swiper-container mb-10"
+        >
+          {product_items.map((item) => (
+            <SwiperSlide key={item._id}>
+              <ProductItem product={item} primary_style={false} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      );
+    }
   }
-  if (!isLoading && !isError && products?.data?.length > 0) {
-    const product_items = products.data;
-    content = (
-      <Swiper
-        {...slider_setting}
-        modules={[Autoplay, Navigation]}
-        className="tp-product-related-slider-active swiper-container mb-10"
-      >
-        {product_items.map((item) => (
-          <SwiperSlide key={item._id}>
-            <ProductItem product={item} primary_style={true} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    );
-  }
-  return (
-    <div className="tp-product-related-slider">
-      {content}
-    </div>
-  );
+
+  return <div className="tp-product-related-slider">{content}</div>;
 };
 
 export default RelatedProducts;
