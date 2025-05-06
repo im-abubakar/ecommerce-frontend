@@ -3,7 +3,7 @@ import { Truck, PackageOpen, RotateCcw } from 'lucide-react';
 const ShippingInfo = () => {
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
-      <div className="border p-4 bg-white rounded shadow" style={{ maxWidth: '500px' }}>
+      <div className="border p-4 bg-white rounded shadow" style={{ maxWidth: '400px' }}>
         {/* Item 1 */}
         <div className="d-flex align-items-center gap-3 pb-3 border-bottom">
           <Truck size={28} className="text-dark flex-shrink-0" />

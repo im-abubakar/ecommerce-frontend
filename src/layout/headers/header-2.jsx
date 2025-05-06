@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
@@ -15,6 +15,14 @@ import useSearchFormSubmit from '@/hooks/use-search-form-submit';
 import OffCanvas from '@/components/common/off-canvas';
 
 const HeaderTwo = ({ style_2 = false }) => {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev === 0 ? 1 : 0));
+    }, 2000); // every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
   const { wishlist } = useSelector((state) => state.wishlist);
   const [isOffCanvasOpen, setIsCanvasOpen] = useState(false);
   const { setSearchText, handleSubmit, searchText } = useSearchFormSubmit();
@@ -54,6 +62,17 @@ const HeaderTwo = ({ style_2 = false }) => {
               </div>
             </div>
           </div> */}
+
+          <div className={`tp-header-top-black text-center ${sticky ? 'header-sticky-2' : ''}`}>
+            <div className="tp-header-top-slider">
+              {activeSlide === 0 ? (
+                <p className="m-0 text-white py-2 fw-semibold slide-text active">📦 Check Parcel Before Payment 📦</p>
+              ) : (
+                <p className="m-0 text-white py-2 fw-semibold slide-text active">🚚 Free Delivery on All Orders 🚚</p>
+              )}
+            </div>
+          </div>
+
 
           <div id="header-sticky" className={`tp-header-bottom-2 tp-header-sticky ${sticky ? 'header-sticky' : ''}`}>
             <div className="container">

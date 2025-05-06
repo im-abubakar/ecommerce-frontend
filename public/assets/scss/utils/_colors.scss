@@ -16,7 +16,8 @@ $colors: (
         '4': #FF3494,
     ),
     'green': (
-        'dark': #115061,
+        // 'dark': #115061,
+        'dark':#bc5800,
         '1': #31B757,
     ),
     'khaki': (
@@ -53,8 +54,8 @@ $colors: (
         '6':#90969B,
     ),
     'theme': (
-        'primary': #0989FF,
-        'secondary': #821F40,
+        'primary': #010101,
+        'secondary': #bc5800,
         'brown': #BD844C,
         'green': #678E61,
     ),
@@ -71,5 +72,5 @@ $colors: (
 
 $white : #fff;
 $black : #010F1C;
-$theme-primary : #0989FF;
+$theme-primary : #121314;
 $border-primary : #EAEBED;

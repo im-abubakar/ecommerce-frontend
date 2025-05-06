@@ -782,4 +782,52 @@ product all slider
     }
 }
 
+/* Animate the whole product card */
 
+/* Animate the whole product card */
+.tp-product-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* On hover - scale and shadow */
+  .tp-product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Animate the image inside */
+  .tp-product-thumb img {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Slight zoom on image */
+  .tp-product-item:hover .tp-product-thumb img {
+    transform: scale(1.1);
+  }
+  
+  /* Animate product action icons */
+  .tp-product-action {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  
+  /* On hover, icons fade in and move up */
+  .tp-product-item:hover .tp-product-action {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+  @media (max-width: 768px) {
+    .tp-product-item-3 {
+        width: 100%;
+    }
+    .tp-product-thumb-3 {
+        width: 100%;
+        height: auto;
+    }
+    .tp-product-content-3 {
+        text-align: center;
+    }
+}

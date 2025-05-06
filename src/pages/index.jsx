@@ -16,6 +16,7 @@ import InstagramArea from "@/components/instagram/instagram-area";
 import CtaArea from "@/components/cta/cta-area";
 import Footer from "@/layout/footers/footer";
 import FashionCategory from "@/components/categories/fashion-category";
+import QuestionAns from "@/components/QuestionAns";
 
 export default function Home() {
   return (
@@ -24,16 +25,17 @@ export default function Home() {
       <Header/>
       <HomeHeroSlider/>
       <FashionCategory/>
-      <FeatureArea/>
+      {/* <FeatureArea/> */}
       <ProductArea/>
       <BannerArea/>
       {/* <OfferProducts/> */}
       <ProductGadgetArea/>
       {/* <ProductBanner/> */}
-       <NewArrivals/>
-      <ProductSmArea/>
-      <BlogArea/>
-      <InstagramArea/>
+       <NewArrivals/>   
+      {/* <ProductSmArea/> */}
+      {/* <BlogArea/> */}
+      {/* <InstagramArea/> */}
+      <QuestionAns/>
       <CtaArea/>
       <Footer/>
     </Wrapper>

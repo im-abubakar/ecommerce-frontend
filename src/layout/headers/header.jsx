@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,16 @@ import HeaderSearchForm from "@/components/forms/header-search-form";
 import { CartTwo, CategoryMenu, Compare, Menu, Phone, ShippingCar, Wishlist } from "@/svg";
 
 const Header = () => {
+
+  // Inside Header component
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev === 0 ? 1 : 0));
+    }, 2000); // every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
   const { wishlist } = useSelector((state) => state.wishlist);
   const [isOffCanvasOpen, setIsCanvasOpen] = useState(false);
   const [isCategoryActive, setIsCategoryActive] = useState(false);
@@ -27,26 +37,18 @@ const Header = () => {
     <>
       <header>
         <div className="tp-header-area p-relative z-index-11">
-          {/* header top start  */}
-          {/* <div className="tp-header-top black-bg p-relative z-index-1 d-none d-md-block">
-            <div className="container">
-              <div className="row align-items-center">
-                <div className="col-md-6">
-                  <div className="tp-header-welcome d-flex align-items-center">
-                    <span>
-                      <ShippingCar />
-                    </span>
-                    <p>FREE Express Shipping On Orders $570+</p>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="tp-header-top-right d-flex align-items-center justify-content-end">
-                    <HeaderTopRight />
-                  </div>
-                </div>
-              </div>
+
+
+          <div className={`tp-header-top-black text-center ${sticky ? 'header-sticky-2' : ''}`}>
+            <div className="tp-header-top-slider">
+              {activeSlide === 0 ? (
+                <p className="m-0 text-white py-2 fw-semibold slide-text active">📦 Check Parcel Before Payment 📦</p>
+              ) : (
+                <p className="m-0 text-white py-2 fw-semibold slide-text active">🚚 Free Delivery on All Orders 🚚</p>
+              )}
             </div>
-          </div> */}
+          </div>
+
 
           {/* header main start */}
           <div className="tp-header-main tp-header-sticky">
@@ -55,8 +57,8 @@ const Header = () => {
                 <div className="col-xl-2 col-lg-2 col-md-4 col-6">
                   <div className="logo">
                     <Link href="/" className="d-flex justify-content-center align-items-center gap-3">
-                    <Image height={80} width={130} src={logo} alt="logo" style={{ transform: 'translateY(-4px)' }} />
-                    <span className="fw-semibold fs-3" style={{ color: '#3e4247' }}>Lets Shop.</span>
+                      <Image height={80} width={130} src={logo} alt="logo" style={{ transform: 'translateY(-4px)' }} />
+                      <span className="fw-semibold fs-3" style={{ color: '#3e4247' }}>Lets Shop.</span>
                     </Link>
                   </div>
                 </div>
@@ -173,6 +175,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+
       {/* sticky header end */}
 
       {/* cart mini sidebar start */}
@@ -180,7 +183,7 @@ const Header = () => {
       {/* cart mini sidebar end */}
 
       {/* off canvas start */}
-      <OffCanvas isOffCanvasOpen={isOffCanvasOpen} setIsCanvasOpen={setIsCanvasOpen} categoryType="electronics" />
+      <OffCanvas isOffCanvasOpen={isOffCanvasOpen} setIsCanvasOpen={setIsCanvasOpen} categoryType="fashion" />
       {/* off canvas end */}
     </>
   );

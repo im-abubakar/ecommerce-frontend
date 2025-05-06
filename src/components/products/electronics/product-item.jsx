@@ -13,6 +13,7 @@ import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 
 const ProductItem = ({ product, offer_style = false }) => {
   const { _id, img, category, title, reviews, price, discount, status, offerDate, previousPrice } = product || {};
+  const [reviewsCount, setReviewsCount] = useState(0);
 
   const { cart_products } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -21,15 +22,14 @@ const ProductItem = ({ product, offer_style = false }) => {
   const dispatch = useDispatch();
   const [ratingVal, setRatingVal] = useState(0);
   useEffect(() => {
-    if (reviews && reviews.length > 0) {
-      const rating =
-        reviews.reduce((acc, review) => acc + review.rating, 0) /
-        reviews.length;
-      setRatingVal(rating);
-    } else {
-      setRatingVal(0);
-    }
-  }, [reviews]);
+    // Generate random review count between 90 and 150
+    const randomReviewsCount = Math.floor(Math.random() * (150 - 90 + 1)) + 90;
+    setReviewsCount(randomReviewsCount);
+
+    // Generate random rating between 3.5 and 4 (1 decimal place)
+    const randomRating = (Math.random() * (4 - 3.5) + 3.5).toFixed(1);
+    setRatingVal(Number(randomRating));
+  }, []);
 
   // handle add product
   const handleAddProduct = (prd) => {
@@ -44,7 +44,7 @@ const ProductItem = ({ product, offer_style = false }) => {
     <>
       <div
         className={`${offer_style ? "tp-product-offer-item" : "mb-25"
-          } tp-product-item transition-3`}
+          } tp-product-item transition-3`} style={{ height: "540px" }}
       >
         <div className="tp-product-thumb p-relative fix">
           <div>
@@ -53,7 +53,11 @@ const ProductItem = ({ product, offer_style = false }) => {
               width="0"
               height="0"
               sizes="100vw"
-              style={{ width: '100%', height: 'auto' }}
+              style={{
+                width: '100%',
+                height: '300px',  // fixed height
+                objectFit: 'cover',  // make sure it covers the area nicely
+              }}
               alt="product-electronic"
             />
 
@@ -123,13 +127,11 @@ const ProductItem = ({ product, offer_style = false }) => {
               />
             </div>
             <div className="tp-product-rating-text">
-              <span>
-                ({reviews && reviews.length > 0 ? reviews.length : 0} Review)
-              </span>
+              <span>({reviewsCount} Reviews)</span>
             </div>
           </div>
           <div className="tp-product-price-wrapper">
-            { previousPrice > price ? (
+            {previousPrice > price ? (
               <>
                 <span className="tp-product-price old-price">Rs.{previousPrice}</span>
                 <span className="tp-product-price new-price">

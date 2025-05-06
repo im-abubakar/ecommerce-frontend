@@ -39,8 +39,8 @@ const FashionCategory = () => {
   if (!isLoading && !isError && categories?.result?.length > 0) {
     const category_items = categories.result;
     content = category_items.map((item) => (
-      <div key={item._id} className="col-xxl-4 col-lg-6">
-        <div className="tp-banner-item-2 p-relative z-index-1 grey-bg-2 mb-20 fix">
+      <div key={item._id} className="col-xxl-4 col-lg-6 col-md-6 col-sm-6">
+        <div className="tp-banner-item-2 p-relative z-index-1 grey-bg-2 mb-20 fix rounded">
           <div
             className="tp-banner-thumb-2 include-bg transition-3 container-fluid"
             style={{
@@ -61,18 +61,19 @@ const FashionCategory = () => {
           <div className="tp-banner-btn-2">
             <a
               onClick={() => handleCategoryRoute(item.parent)}
-              className="cursor-pointer tp-btn tp-btn-border tp-btn-border-sm"
+              className="cursor-pointer tp-btn tp-btn-border tp-btn-border-sm rounded"
             >
               Shop Now <ArrowRightLong />
             </a>
           </div>
+
         </div>
       </div>
     ));
   }
   return (
     <>
-      <section className="tp-banner-area mt-20">
+      <section className="tp-banner-area mt-20 my-4">
         <div className="container-fluid tp-gx-40">
           <div className="row tp-gx-20">{content}</div>
         </div>

@@ -37,7 +37,7 @@ const CtaArea = () => {
   };
 
   return (
-    <section className="tp-subscribe-area pt-70 pb-65 theme-bg p-relative z-index-1">
+    <section className="tp-subscribe-area pt-70 pb-65 p-relative z-index-1" style={{backgroundColor: "rgb(34 32 32)"}}>
       <div className="tp-subscribe-shape">
         <Shape img={shape_1} num="1" />
         <Shape img={shape_2} num="2" />

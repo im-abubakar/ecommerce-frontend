@@ -130,14 +130,14 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
       {offerDate?.endDate && <ProductDetailsCountdown offerExpiryTime={offerDate?.endDate} />}
       {/* if ProductDetailsCountdown true end */}
 
-      <div className="product-features">
+      <div className="product-features my-4">
         <div className="feature-item my-1">
           <Image src="/assets/icons/delivery.png" alt="Free Delivery" className="feature-icon" width={30} height={28} />
           <strong className='h4 mx-2 fs-6 mt-1'>Free Delivery All Over Pakistan</strong>
         </div>
         <div className="feature-item my-2">
           <Image src="/assets/icons/box.png" alt="Free Delivery" className="feature-icon" width={30} height={28} />
-          <strong className='h4 mx-2 fs-6 mt-1'>Allow To Open Parcel</strong>
+          <strong className='h4 mx-2 fs-6 mt-2'>Allow To Open Parcel</strong>
         </div>
         <div className="feature-item my-1">
           <Image src="/assets/icons/exchange.png" alt="Free Delivery" className="feature-icon" width={30} height={28} />
@@ -147,48 +147,52 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
 
 
       {/* actions */}
-      <div className="tp-product-details-action-wrapper mt-4">
+      <div className="tp-product-details-action-wrapper mt-5">
         <h3 className="tp-product-details-action-title">Quantity</h3>
         <div className="tp-product-details-action-item-wrapper d-sm-flex align-items-center">
           {/* product quantity */}
-          <ProductQuantity setQuantity ={setQuantity} />
+          <ProductQuantity setQuantity={setQuantity} />
           {/* product quantity */}
           <div className="tp-product-details-add-to-cart mb-15 w-100">
             <button onClick={() => handleAddProduct(productItem)} disabled={status === 'out-of-stock'} className="tp-product-details-add-to-cart-btn w-100">Add To Cart</button>
           </div>
         </div>
 
-        <button className="btn btn-dark rounded-pill d-flex align-items-center justify-content-center gap-1 px-5 py-3" onClick={() => setIsModalOpen(true)}>
+        <button
+          className="btn rounded-pill d-flex align-items-center justify-content-center gap-2 px-5 py-3 mx-auto"
+          style={{ backgroundColor: '#000', color: '#fff' }}
+          onClick={() => setIsModalOpen(true)}
+        >
           <ShoppingCart size={20} />
-          <strong className='mx-1'>Buy with Cash on Delivery</strong>
+          <strong>Buy with Cash on Delivery</strong>
         </button>
 
-        <BuyWithCodeModal
-          isOpen={isModalOpen}
-          onClose={() => {
-            console.log("Closing modal"); // Add this for debugging
-            setIsModalOpen(false);
-          }}
-          onSubmit={handleOrderSubmit}
-          productItem={productItem}
-          quantity={quantity}
-        />
-
-        <a
+        {/* WhatsApp Button */}
+        <Link
           href={`https://wa.me/923104626389?text=${encodeURIComponent(`Hi! I'm interested in the product: ${title} (SKU: ${sku})`)}`}
           target="_blank"
           rel="noopener noreferrer"
         >
           <button
-            className="tp-product-details-add-to-cart-btn w-100 rounded-pill"
-            style={{ backgroundColor: '#25D366', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+            className="btn rounded-pill d-flex align-items-center justify-content-center gap-2 px-5 py-3 mx-auto"
+            style={{ backgroundColor: '#25D366', color: '#fff', marginTop: '10px' }}
           >
             <FaWhatsapp size={20} />
-            Chat on WhatsApp
+            <strong>Chat on WhatsApp</strong>
           </button>
-        </a>
+        </Link>
       </div>
 
+      <BuyWithCodeModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          console.log("Closing modal"); // Add this for debugging
+          setIsModalOpen(false);
+        }}
+        onSubmit={handleOrderSubmit}
+        productItem={productItem}
+        quantity={quantity}
+      />
       <ShippingInfo />
 
 

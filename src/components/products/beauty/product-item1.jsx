@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { Cart, QuickView, Wishlist } from "@/svg";
 import { handleProductModal } from "@/redux/features/productModalSlice";
 import { add_cart_product } from "@/redux/features/cartSlice";
 import { add_to_wishlist } from "@/redux/features/wishlist-slice";
+import { Rating } from "react-simple-star-rating";
 
 const ProductItem1 = ({ product, prdCenter = false, primary_style = false }) => {
     const { _id, img, title, discount, price, tags, status, previousPrice } = product || {};
@@ -17,6 +18,15 @@ const ProductItem1 = ({ product, prdCenter = false, primary_style = false }) => 
     const dispatch = useDispatch();
 
     const [showFullTitle, setShowFullTitle] = useState(false);
+
+    // Random reviews and rating
+    const [randomReviews, setRandomReviews] = useState(0);
+    const [randomRating, setRandomRating] = useState(0);
+
+    useEffect(() => {
+        setRandomReviews(Math.floor(Math.random() * (150 - 90 + 1)) + 90); // between 90 and 150
+        setRandomRating((Math.random() * (4 - 3.5) + 3.5).toFixed(1)); // between 3.5 and 4, one decimal
+    }, []);
 
     // handle add product
     const handleAddProduct = (prd) => {
@@ -37,11 +47,21 @@ const ProductItem1 = ({ product, prdCenter = false, primary_style = false }) => 
         <div
             className={`tp-product-item-3 mb-50 ${primary_style ? "tp-product-style-primary" : ""} ${prdCenter ? "text-center" : ""}`}
         >
-            <div className="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
+            <div className="tp-product-thumb-3 fix p-relative z-index-1">
                 <Link href={`/product-details/${_id}`}>
-                    <Image src={img} alt="product image" width={282} height={320} />
+                    <div style={{
+                        width: '100%',
+                        height: '130px',  // fixed height
+                        objectFit: 'cover',  // make sure it covers the area nicely
+                    }}>
+                        <Image
+                            src={img}
+                            alt="product image"
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
                 </Link>
-
                 <div className="tp-product-badge">
                     {status === 'out-of-stock' && <span className="product-hot">out-stock</span>}
                 </div>
@@ -71,6 +91,17 @@ const ProductItem1 = ({ product, prdCenter = false, primary_style = false }) => 
                         </button>
                     )}
                 </h3>
+
+                {/* Rating */}
+                <div className="tp-product-rating d-flex align-items-center">
+                    <div className="tp-product-rating-icon">
+                        <Rating allowFraction size={13} initialValue={randomRating} readonly />
+                    </div>
+                    <div className="tp-product-rating-text" style={{ fontSize: "10px" }}>
+                        <span>({randomReviews} Reviews)</span>
+                    </div>
+                </div>
+
                 <div className="tp-product-price-wrapper-3">
                     <span className="tp-product-price old-price">Rs.{previousPrice.toFixed(2)} PKR</span>
                 </div>

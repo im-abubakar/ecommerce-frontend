@@ -87,11 +87,14 @@ const BuyWithCodeModal = ({ isOpen, onClose, onSubmit, productItem, quantity }) 
         <div className="modal show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title">CASH ON DELIVERY</h5>
-                        <button type="button" className="close" onClick={onClose} aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div className="modal-header d-flex justify-content-between align-items-center">
+                        <h5 className="modal-title mb-0">CASH ON DELIVERY</h5>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={onClose}
+                            aria-label="Close"
+                        ></button>
                     </div>
 
                     <div className="modal-body">
