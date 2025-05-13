@@ -8,7 +8,7 @@ const ShippingInfo = () => {
         <div className="d-flex align-items-center gap-3 pb-3 border-bottom">
           <Truck size={28} className="text-dark flex-shrink-0" />
           <p className="mb-0 fs-5 text-dark">
-            <strong>Fast Processing:</strong> Orders ship within 24 hours.
+            <strong>Delivery Time:</strong> Orders deliver within 3 working days.
           </p>
         </div>
 
@@ -16,17 +16,17 @@ const ShippingInfo = () => {
         <div className="d-flex align-items-center gap-3 pb-3 border-bottom mt-3">
           <PackageOpen size={28} className="text-dark flex-shrink-0" />
           <p className="mb-0 fs-5 text-dark">
-            <strong>Allow To Open:</strong> You can check your parcel before paying.
+            <strong>Return Allow:</strong> You can return your parcel in 7 days.
           </p>
         </div>
 
         {/* Item 3 */}
-        <div className="d-flex align-items-center gap-3 pb-3 mt-3">
+        {/* <div className="d-flex align-items-center gap-3 pb-3 mt-3">
           <RotateCcw size={28} className="text-dark flex-shrink-0" />
           <p className="mb-0 fs-5 text-dark">
             <strong>Hassle-Free Returns:</strong> 30-day easy returns & exchanges.
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
