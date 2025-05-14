@@ -137,11 +137,11 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
         </div>
         <div className="feature-item my-2">
           <Image src="/assets/icons/box.png" alt="Free Delivery" className="feature-icon" width={30} height={28} />
-          <strong className='h4 mx-2 fs-6 mt-2'>Allow To Open Parcel</strong>
+          <strong className='h4 mx-2 fs-6 mt-2'>Order Deliver Within 3 Working Days</strong>
         </div>
         <div className="feature-item my-1">
           <Image src="/assets/icons/exchange.png" alt="Free Delivery" className="feature-icon" width={30} height={28} />
-          <strong className='h4 mx-2 fs-6 mt-1'>30 Days Return Policy Incase Of Any Issue</strong>
+          <strong className='h4 mx-2 fs-6 mt-1'>Return your parcel in 7 days</strong>
         </div>
       </div>
 
