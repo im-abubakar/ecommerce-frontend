@@ -51,4 +51,5 @@ This is a modern full stack eCommerce web application built with **Next.js, Expr
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/ShuvoProgram/shofy-electronics-ecommerce.git
+git clone [https://github.com/im-abubakar/ecommerce-frontend.git]
+
